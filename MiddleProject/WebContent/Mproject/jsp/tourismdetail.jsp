@@ -32,7 +32,7 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/Mproject/js/scroll.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/Mproject/js/main.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/Mproject/js/tourism.js"></script>
-	
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=95544088854ec9cb3a80eaad450b5e1e"></script>
 <%
 
 	TourismVO vo = (TourismVO)request.getAttribute("tourDetail");
@@ -42,21 +42,32 @@
 <script>
 $(function(){
 	mypath = "<%=request.getContextPath()%>";
+
+	<%-- $(".gbBtn").on('click',function(){
+		location.href="<%=request.getContextPath()%>/tourismGood.do";
+		
+	}); --%>
+	
+	// 지도
+	var container =document.getElementById('map');
+	var options ={
+		center : new kakao.maps.LatLng(33.450701 ,126.570667),
+		level :3
+	};
+
+	var map = new kakao.maps.Map(container ,options);
+
 	$(".gbBtn").on('click',function(){
 		gb=$(this).attr('id');
 		trNo = "<%=vo.getTr_no()%>";
 		
 		$.updateGB(gb, trNo);
 	}); 
-	
-	<%-- $(".gbBtn").on('click',function(){
-		location.href="<%=request.getContextPath()%>/tourismGood.do";
-		
-	}); --%>
 
-})
 
-</script>
+});
+
+</script >
 
 </head>
 
@@ -106,13 +117,13 @@ $(function(){
 			</div>
 		</div>
 	
-		<div id="hitNum">조회수 : <%=vo.getTr_hit() %></div>
 		<!--container -->
 
 		<section id="container">
 			<div id="content">
 				<article class="area_preview">
 					<div class="wrap">
+						<div id="hitNum">조회수 : <%=vo.getTr_hit() %></div>
 						<div class="preview_inn">
 						<div class="img">
 						<img src="<%=request.getContextPath()%>/imageView.do?saveFileName=<%=vo.getSave_file_name()%>" >	
@@ -132,6 +143,11 @@ $(function(){
 							</div>
 						
 						</div>		
+						
+						<!-- 지도 -->
+						<div id="map" style="width:500px; height:400px;"></div>
+						
+
 						
 						
 						<!-- 좋아요, 싫어요 -->

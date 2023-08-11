@@ -15,8 +15,9 @@ $.updateGB = function(gb, trNo){
 		dataType : 'json',
 		success : function(res){
 			
-			$('#good_num').html(res.goodNum);
-			$('#bad_num').html(res.badNum);
+			alert("ajax옴")
+			$('#good_num').text(res.tr_good);
+			$('#bad_num').text(res.tr_bad);
 			
 //			location.reload();
 		},// succes 끝
