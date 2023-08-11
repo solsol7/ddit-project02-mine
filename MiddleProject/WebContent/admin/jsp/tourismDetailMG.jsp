@@ -278,11 +278,7 @@ $(function(){
 										</tr>
 										<tr>
 											<th class="syths">내용</th>	
-											<td><textarea class="sytext"
-
-
-
-><%=vo.getTr_con() %></textarea></td>												
+											<td><textarea class="sytext" disabled><%=vo.getTr_con() %></textarea></td>												
 										</tr>
 										</tbody>
 										</table>

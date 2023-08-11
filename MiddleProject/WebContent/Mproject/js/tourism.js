@@ -3,18 +3,22 @@
  */
 
 //좋아요 싫어요 클릭
-$.updateGB = function(gb){
+$.updateGB = function(gb, trNo){
 
-	
 	$.ajax({
 		url : `${mypath}/tourismGood.do`,
 		type : 'get',
 		data : {
-			"trNo" : vo.tr_no,
-			"gb" : gb	
+			"trNo" : trNo,
+			"gb" : gb
 		},
+		dataType : 'json',
 		success : function(res){
 			
+			$('#good_num').html(res.goodNum);
+			$('#bad_num').html(res.badNum);
+			
+//			location.reload();
 		},// succes 끝
 		error : function(xhr){
 			alert("상태 : "+xhr.status)
@@ -42,8 +46,8 @@ $.tourismList = function(cpage){
 							<span class="img"> <i class = "imageDetail" style="background-image: url('${mypath}/imageView.do?saveFileName=${v.save_file_name}');"></i></span>
 							<div class="tour_tit">${v.tr_name}</div>
 							<div class="like_wrap">
-								<div class="good_ico gbBtn" id="good_ico"><img src="${mypath}/Mproject/images/good.PNG"><span class="good_num">${v.tr_good}</span> </div>
-								<div class="bad_ico gbBtn" id="bad_ico"><img src="${mypath}/Mproject/images/bad.PNG"><span class="good_num">${v.tr_bad}</span> </div>
+								<div class="good_ico gbBtn"><img src="${mypath}/Mproject/images/good.PNG"><span class="good_num">${v.tr_good}</span> </div>
+								<div class="bad_ico gbBtn"><img src="${mypath}/Mproject/images/bad.PNG"><span class="good_num">${v.tr_bad}</span> </div>
 							</div>
 						</span>
 					</a>

@@ -26,7 +26,6 @@ public class ImageView extends HttpServlet {
 		String uploadPath = "d:/d_other/MProjectFiles";
 		
 		File file = new File(uploadPath + File.separator + saveFileName);
-		System.out.println("file==>" + file.exists() + "==> " + file.getAbsolutePath());
 		
 		BufferedInputStream bin = null;
 		BufferedOutputStream bout = null;

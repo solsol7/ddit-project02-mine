@@ -30,7 +30,8 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/Mproject/js/swiper-min.js"></script>
 <%-- <script type="text/javascript" src="<%=request.getContextPath()%>/Mproject/js/slide.js"></script> --%>
 <script type="text/javascript" src="<%=request.getContextPath()%>/Mproject/js/scroll.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/Mproject./js/main.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/Mproject/js/main.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/Mproject/js/tourism.js"></script>
 	
 <%
 
@@ -39,16 +40,19 @@
 %>
 	
 <script>
-alert("2");
 $(function(){
-	
-	alert("1");
-
+	mypath = "<%=request.getContextPath()%>";
 	$(".gbBtn").on('click',function(){
-		alert("1");
 		gb=$(this).attr('id');
-		$.updateGB(gb);
-	})
+		trNo = "<%=vo.getTr_no()%>";
+		
+		$.updateGB(gb, trNo);
+	}); 
+	
+	<%-- $(".gbBtn").on('click',function(){
+		location.href="<%=request.getContextPath()%>/tourismGood.do";
+		
+	}); --%>
 
 })
 
@@ -102,7 +106,7 @@ $(function(){
 			</div>
 		</div>
 	
-		<div>조회수 : <%=vo.getTr_hit() %></div>
+		<div id="hitNum">조회수 : <%=vo.getTr_hit() %></div>
 		<!--container -->
 
 		<section id="container">
@@ -132,8 +136,8 @@ $(function(){
 						
 						<!-- 좋아요, 싫어요 -->
 						<div class="like_wrap">
-							<div class="good_ico" id="good_ico"><a href="#"><img src="<%=request.getContextPath()%>/Mproject/images/good.PNG"><span class="good_num"><%=vo.getTr_good() %></span></a> </div>
-							<div class="bad_ico" id="bad_ico"><a href="#"><img src="<%=request.getContextPath()%>/Mproject/images/bad.PNG"><span class="good_num"><%=vo.getTr_bad() %></span></a> </div>
+							<div class="good_ico gbBtn" id="good_ico"><a href="#"><img src="<%=request.getContextPath()%>/Mproject/images/good.PNG"><span class="good_num" id="good_num"><%=vo.getTr_good() %></span></a> </div>
+							<div class="bad_ico gbBtn" id="bad_ico"><a href="#"><img src="<%=request.getContextPath()%>/Mproject/images/bad.PNG"><span class="good_num" id="bad_num"><%=vo.getTr_bad() %></span></a> </div>
 						</div>
 						
 						
