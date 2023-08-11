@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tourism">
+
+<sql id="dynamicCondition">
+   <where>
+       <if test="sword != null and sword neq '' ">
+        tr_name like  '%'||#{sword}||'%'
+       </if>
+   </where>
+</sql>
+
+<!-- 모든 결과 출력 -->
+<select id="getAllList" resultType="tourVo" parameterType="String">
+	select * from tourism <include refid="dynamicCondition"></include>
+	order by tr_no desc
+</select>
+
+
+<!-- 모든 결과값의 갯수 출력 -->
+<select id="getListCount" resultType="int" parameterType="Map">
+	select count(*) from tourism <include refid="dynamicCondition"></include>
+	order by tr_no desc
+</select>
+
+
+<!-- 페이지 결과값 출력 -->
+<select id="selectByPage" resultType="tourVo" parameterType="Map">
+	 select A.* from (
+	     select rownum as rnum, B.*  from (
+	         select * from tourism
+	         <include refid="dynamicCondition"/>
+	         order by tr_no desc) B
+	         <![CDATA[
+	     where rownum <= #{endIndex} ) A 
+ 	 where A.rnum >=#{startIndex}
+ ]]> 
+</select>
+
+
+<!-- detail 출력 -->
+<select id="selectById" resultType="tourVo" parameterType="String">
+	select * from tourism where tr_no=#{tr_no}
+</select>
+
+
+<!-- 관광지 등록 -->
+<insert id="insertTourism" parameterType="tourVo">
+					
+insert into tourism(TR_NO, TR_NAME, TR_CON, TR_ADDR, TR_TEL, TR_LAT, TR_LONG, TR_GOOD,
+						TR_BAD, TR_HIT, TR_DATE, MG_NO, ORIGIN_FILE_NAME, SAVE_FILE_NAME)
+	values('TR_23_' || LPAD((SEQ_TR.NEXTVAL), 3, '0'), #{tr_name}, #{tr_con}, #{tr_addr}, #{tr_tel}, #{tr_lat}, #{tr_long},
+					0, 0, 0, sysdate, 'MG_23_001', #{origin_file_name}, #{save_file_name})
+</insert>
+
+
+<!-- 관광지 삭제 -->
+<delete id="deleteTourism" parameterType="String">
+	delete tourism where tr_no = #{data}
+</delete>
+
+<!-- 관광지 수정 -->
+<update id="updateTourism" parameterType="tourVo">
+	update tourism set tr_name=#{tr_name}, tr_con=#{tr_con}, tr_addr=#{tr_addr}, tr_tel=#{tr_tel}, tr_lat=#{tr_lat}, tr_long=#{tr_long},
+					tr_date=sysdate, origin_file_name=#{origin_file_name}, save_file_name=#{save_file_name} where tr_no=#{tr_no}
+</update>
+
+<!-- 조회수 증가 -->
+<update id="updateHit" parameterType="String">
+	update tourism set tr_hit=tr_hit+1 where tr_no=#{tr_no}
+</update>
+
+<!-- 좋아요 증가 -->
+<update id="updateGood" parameterType="String">
+	update tourism set tr_good=tr_good+1 where tr_no=#{tr_no}
+</update>
+
+<!-- 싫어요 증가 -->
+<update id="updateBad" parameterType="String">
+	update tourism set tr_bad=tr_bad+1 where tr_no=#{tr_no}
+</update>
+</mapper>

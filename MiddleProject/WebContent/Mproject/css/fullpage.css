@@ -1,0 +1,105 @@
+/*!
+ * fullPage 3.0.4
+ * https://github.com/alvarotrigo/fullPage.js
+ *
+ * @license GPLv3 for open source use only
+ * or Fullpage Commercial License for commercial use
+ * http://alvarotrigo.com/fullPage/pricing/
+ *
+ * Copyright (C) 2018 http://alvarotrigo.com/fullPage - A project by Alvaro Trigo
+ */
+
+ html.fp-enabled,
+ .fp-enabled body{overflow:hidden; margin:0; padding:0; -webkit-tap-highlight-color:rgba(0,0,0,0);}
+ .fp-section{position:relative; box-sizing:border-box; -webkit-box-sizing:border-box; -moz-box-sizing:border-box;}
+ .fp-slide{float:left;}
+ .fp-slide,
+ .fp-slidesContainer{display:block; height:100%;}
+ .fp-slides{position:relative; overflow:hidden; z-index:1; height:100%; transition:all 0.3s ease-out; -webkit-transition:all 0.3s ease-out;}
+ .fp-section.fp-table,
+ .fp-slide.fp-table{display:table; width:100%; table-layout:fixed;}
+ .fp-tableCell{display:table-cell; width:100%; height:100%; vertical-align:middle;}
+ .fp-slidesContainer{position:relative; float:left;}
+ .fp-controlArrow{position:absolute; top:50%; z-index:4; width:0; height:0; margin-top:-38px; transform:translate3d(0,0,0); -webkit-transform:translate3d(0,0,0); -ms-transform:translate3d(0,0,0); -webkit-user-select:none; -moz-user-select:none; -khtml-user-select:none; -ms-user-select:none; cursor:pointer; border-style:solid;}
+ .fp-controlArrow.fp-prev{left:15px; width:0; border-width:38.5px 34px 38.5px 0; border-color:transparent #fff transparent transparent;}
+ .fp-controlArrow.fp-next{right:15px; border-width:38.5px 0 38.5px 34px; border-color:transparent transparent transparent #fff;}
+ .fp-scrollable{position:relative; overflow:hidden;}
+ .fp-scroller{overflow:hidden;}
+ .iScrollIndicator{border:0 !important;}
+ .fp-notransition{transition:none !important; -webkit-transition:none !important;}
+ 
+ #fp-nav{position:fixed; opacity:1; top:50%; z-index:60; margin-top:-62px !important; transition:all 0.6s ease-out 0s; -webkit-transform:translate3d(0,0,0);}
+ #fp-nav.fp-right{left:80px;}
+ #fp-nav.fp-left{right:70px;}
+ #fp-nav ul,
+ .fp-slidesNav ul{position:relative; margin:0; padding:0;}
+ #fp-nav ul li,
+ .fp-slidesNav ul li{display:block; position:relative; /* width:64px; */ height:20px; margin:0 0 15px;}
+ .fp-slidesNav ul li:last-child{margin-bottom:0}
+ .fp-slidesNav ul li{display:inline-block;}
+ #fp-nav ul li a,
+ .fp-slidesNav ul li a{display:block; position:relative; z-index:1; width:100%; height:100%; cursor:pointer; text-decoration:none;}
+ 
+ 
+ #fp-nav ul li a.active span,
+ .fp-slidesNav ul li a.active span,
+ #fp-nav ul li:hover a.active span,
+ .fp-slidesNav ul li:hover a.active span{ opacity: 1;}
+ /* #fp-nav ul li a.active::before {width: 21px; height: 21px; border-radius: 15px; border: 1px solid #fff;content: '';display: inline-block;position: absolute;top: -1px;left: -8px;} */
+
+ #fp-nav ul li a span,
+ .fp-slidesNav ul li a span{position:absolute; top:50%; left:0; z-index:1; width: 18px; height: 18px; background: #fff; border-radius:50%; transform: translateY(-50%); transition:all 0.1s ease-in-out; -webkit-transition:all 0.1s ease-in-out; -moz-transition:all 0.1s ease-in-out; -o-transition:all 0.1s ease-in-out;opacity: .5;}
+ #fp-nav ul li:hover a span,
+ .fp-slidesNav ul li:hover a span{border-color:#fff;}
+ #fp-nav ul li .fp-tooltip{display:block; position:absolute; top:0; width:0;font-size:14px;color:#fff; max-width:220px;cursor:pointer;}
+ #fp-nav ul li:hover .fp-tooltip,
+ #fp-nav.fp-show-active a.active + .fp-tooltip{opacity:1; width:auto; transition:opacity 0.2s ease-in; -webkit-transition:opacity 0.2s ease-in;}
+ #fp-nav ul li .fp-tooltip.fp-right{right:20px;}
+ #fp-nav ul li .fp-tooltip.fp-left{left:20px;}
+ 
+ .fp-slidesNav{position:absolute; opacity:1; right:0; left:0 !important; z-index:4; margin:0 auto !important; transform:translate3d(0,0,0); -webkit-transform:translate3d(0,0,0); -ms-transform:translate3d(0,0,0);}
+ .fp-slidesNav.fp-bottom{bottom:17px;}
+ .fp-slidesNav.fp-top{top:17px;}
+ 
+ .fp-auto-height.fp-section,
+ .fp-auto-height .fp-slide,
+ .fp-auto-height .fp-tableCell{height:auto !important;}
+ 
+ .fp-responsive .fp-auto-height-responsive.fp-section,
+ .fp-responsive .fp-auto-height-responsive .fp-slide,
+ .fp-responsive .fp-auto-height-responsive .fp-tableCell{height:auto !important;}
+ .fp-sr-only{display:none; position:absolute; overflow:hidden; width:1px; height:1px; padding:0; border:0; white-space:nowrap; clip:rect(0, 0, 0, 0);}
+ 
+ /* add style */
+ .name_navi{opacity:0; position:absolute; top:-2px; left:0px; font-size:13px; font-weight: 700; color:#fff; transition:0.5s;}
+ .fp-tooltip{opacity:0;}
+ #fp-nav ul li a.active + .fp-tooltip{opacity:1; left:25px;}
+ #fp-nav ul li:last-child{display:none;}
+ #fp-nav ul li a.active .name_navi{opacity:1;}
+ .fp-viewing-5 #fp-nav{opacity:0;}
+ 
+ /* .fp-viewing-3Page #fp-nav ul li a span, 
+ .fp-viewing-5Page #fp-nav ul li a span{background:#666}
+ .fp-viewing-3Page #fp-nav ul li a.active::before,
+ .fp-viewing-5Page #fp-nav ul li a.active::before {border: 1px solid #666;} */
+ 
+ .fp-viewing-3Page #fp-nav ul li .fp-tooltip,
+ .fp-viewing-5Page #fp-nav ul li .fp-tooltip{color:#666}
+ 
+ @media all and (max-width:1580px){
+	 #fp-nav.fp-right {left: 20px;}
+ }
+ 
+ @media all and (max-width:1420px){
+	 .area_portfolio .inr{width:94%}
+ }
+ 
+ @media all and (max-width:1280px){
+	 .fp-section.fp-table, 
+	 .fp-slide.fp-table {display: block; width: 100%; height: auto !important;}
+	 .fp-tableCell{display:block; height:auto !important;}
+	 #fp-nav.fp-right{display: none;}
+	 #fp-nav{display: none !important;}
+ }
+ 
+ 
