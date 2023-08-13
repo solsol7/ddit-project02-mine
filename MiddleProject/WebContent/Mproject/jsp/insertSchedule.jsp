@@ -23,6 +23,7 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Mproject/css/tourism.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Mproject/css/schedule.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Mproject/css/main.css?ver=1.2">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Mproject/css/insertSchedule.css">
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
@@ -32,6 +33,7 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/Mproject/js/scroll.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/Mproject/js/main.js"></script>
 <script src="<%=request.getContextPath()%>/Mproject/js/insertSchedule.js"  type="text/javascript"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=95544088854ec9cb3a80eaad450b5e1e"></script>
 
 
 <script>
@@ -40,13 +42,24 @@ $(function(){
  	mypath="<%=request.getContextPath()%>";
 	
 	$.startPage();
-
-	$('#searchBtn').on('click',function(){
+	
+	//검색버튼
+	$('#searchBtn').on('click', function(){
 		currentPage = 1;
 		sword = $('.search #searchTourList').val()
 		$.search(currentPage);
-	})
-
+	});
+	
+	//관광지 추가
+	$(document).on('click','.tourismChoice', function(){
+		$.tourismChoice();
+	});
+	
+	//관광지 정보
+	$(document).on('click','.search_tr_name', function(){
+		trNo = $(this).attr('id');
+		$.tourismInfo(trNo);
+	});
 	
 	//페이지버튼
 	$(document).on('click','.pageno',function(){
@@ -160,7 +173,9 @@ $(function(){
 							</div>
 							
 						</div><!--tour_wrap  -->
-						<div class="tour_map"></div>
+						<div class="tour_map">
+						<div id="map" style="width:700px; height:640px;"></div>
+						</div>
 					</div>	
 				</div>
 			</div>
