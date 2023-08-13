@@ -82,4 +82,10 @@ insert into tourism(TR_NO, TR_NAME, TR_CON, TR_ADDR, TR_TEL, TR_LAT, TR_LONG, TR
 <update id="updateBad" parameterType="String">
 	update tourism set tr_bad=tr_bad+1 where tr_no=#{tr_no}
 </update>
+
+
+<select id="date" resultType="Date">
+	select sc_sdate from schedule where sc_no='123456'
+</select>
+
 </mapper>

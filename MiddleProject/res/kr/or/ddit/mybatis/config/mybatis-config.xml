@@ -21,6 +21,8 @@
 	<typeAliases>
 		<!-- <typeAlias type="클래스의 전체 경로" alias="별칭"/> -->
 		<typeAlias type="vo.TourismVO" alias="tourVo"></typeAlias>		
+		<typeAlias type="vo.ScheduleVO" alias="scheduleVo"></typeAlias>		
+		<typeAlias type="vo.ScheduleDetailVO" alias="scheduleDetailVo"></typeAlias>		
 	</typeAliases>
 	
 	 
@@ -42,5 +44,6 @@
 	 	<mappers>
 	 		<!-- <mapper resource="경로명/파일명.xml"/> -->
 	 		<mapper resource="kr/or/ddit/mybatis/mappers/tourism-mapper.xml"/>
+	 		<mapper resource="kr/or/ddit/mybatis/mappers/insertSchedule-mapper.xml"/>
 	 	</mappers>
 </configuration>

@@ -1,8 +1,6 @@
-<%@page import="vo.TourismVO"%>
-<%@page import="java.util.List"%>
+<%@page import="vo.ScheduleVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page isELIgnored="true" %> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -23,7 +21,7 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Mproject/css/detail.css">
 <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Mproject/js/custom.css"> --%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Mproject/css/tourism.css">
-
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Mproject/css/schedule.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Mproject/css/main.css?ver=1.2">
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
@@ -33,51 +31,44 @@
 <%--<script type="text/javascript" src="<%=request.getContextPath()%>/Mproject/js/slide.js"></script> --%>
 <script type="text/javascript" src="<%=request.getContextPath()%>/Mproject/js/scroll.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/Mproject/js/main.js"></script>
-<script src="<%=request.getContextPath()%>/Mproject/js/tourism.js"  type="text/javascript"></script>
+<script src="<%=request.getContextPath()%>/Mproject/js/insertSchedule.js"  type="text/javascript"></script>
+
 
 <script>
-mypath = '<%= request.getContextPath()%>';
-currentPage = 1;
-
 $(function(){
 	
-	$.tourismList(currentPage);
+ 	mypath="<%=request.getContextPath()%>";
+	
+	$.startPage();
+
+	$('#searchBtn').on('click',function(){
+		currentPage = 1;
+		sword = $('.search #searchTourList').val()
+		$.search(currentPage);
+	})
+
 	
 	//페이지버튼
 	$(document).on('click','.pageno',function(){
 		currentPage = $(this).text();
-		$.tourismList(currentPage);
+		$.search(currentPage);
 	});	//.pageno 끝
-	
-	
-	//검색버튼
-	$(document).on('click','#sBtn',function(){
-		currentPage = 1;
-		$.tourismList(currentPage);
-	}); //sBtn 끝
 	
 	
 	//다음버튼
 	$(document).on('click','#nextBtn', function(){
 		currentPage = parseInt($('.pageno').last().text())+1;
-		$.tourismList(currentPage);
+		$.search(currentPage);
 	});//다음 끝
 	
 	
 	//이전버튼
 	$(document).on('click', '#prevBtn', function(){
 		currentPage = parseInt($('.pageno').first().text())-1
-		$.tourismList(currentPage);
+		$.search(currentPage);
 	});//이전 끝
 
-	
-	//List클릭
-	$(document).on('click','.tourDetail',function(){
-		trNo = $(this).attr('id');
-		location.href = "<%= request.getContextPath()%>/tourismDetail.do?trNo="+trNo;
-	});//tourDetail 끝
-
-})// $(function)끝
+});//$(function) 끝
 </script>
 </head>
 
@@ -135,32 +126,43 @@ $(function(){
 		
 		<section id="container">
 			<div id="content">
-				
-				<article class="area_photo">
-				
-					<div class="wrap">
-						<div id="search">
-							<input type="text" id="sword">
-							<input type="button" id="sBtn" value="검색">
-						</div>
-
-						<div class="tab_container">
-							<div id="tab1" class="tab_cnt" style="display: block;">
-								<script type="text/javascript" src="/js/board.js"></script>
-								<script type="text/javascript">
-									document.title = '(목록) | 독도사진';
-								</script>
-								<ul class="photoList" id="result"></ul>
-
-
+				<div class="wrap">
+					<div class="tour_wrap">
+						<div class="tourtime_wrap">
+							<ul class="tab_day_list" id="tab_day_list">
+								<!-- DAY출력 부분 -->
+							</ul>
+							<div class="content_wrap">
+								<!-- tabcontent 출력부분 -->
+<!-- 								<div class ="tabcontent"> -->
+<!-- 									<ul id="schedule_list"> -->
+<!-- 										<li>한라산</li> -->
+<!-- 										<li>성산일충봉</li> -->
+<!-- 										<li>섭지코지</li> -->
+<!-- 										<li>만장굴</li> -->
+<!-- 									</ul> -->
+<!-- 								</div> -->
 							</div>
-					
-						</div>
-
-
-					</div>
-				</article>
-
+							
+							
+							<div class="sch_wrap">
+								<form class="search_form">
+						            <div class="search">
+						                <input type="text" value="" id="searchTourList">
+						                <button type="button" id="searchBtn">검색</button>
+						            </div>
+						        </form>
+						        
+								<div class="sch_list">
+									<!-- 검색리스트 출력하는 곳 -->
+								</div>
+								<div id="pager"></div>
+							</div>
+							
+						</div><!--tour_wrap  -->
+						<div class="tour_map"></div>
+					</div>	
+				</div>
 			</div>
 		</section>
 		
@@ -178,7 +180,6 @@ $(function(){
 		<footer id="footer">
 			<div id="dokdo_bg" class="dokdo_area">
 				<div id="dokdo_inn" class="wrap">
-				
 
 					<p>“ 아름다운 대전 ”</p>
 					<div class="circle1"></div>
@@ -201,7 +202,6 @@ $(function(){
 		<!-- //footer -->
 		<!-- //footer -->
 	</div>
-
 
 </body>
 
