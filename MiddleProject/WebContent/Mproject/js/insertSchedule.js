@@ -43,9 +43,10 @@ $.tourismInfo = function(trNo){
 	})// ajax끝
 }
 
-//관광지 선택
-$.tourismChoice = function(){
-	
+//관광지 추가
+$.tourismChoice = function(trNo, trName){
+	$('.content_wrap div[style="display:block"] .schedule_list')
+			.append('<li class="selectedSchedule" id='+trNo+'>'+trName+'</li>');
 }
 
 // 검색
@@ -79,6 +80,17 @@ $.search = function(cpage){
 	})//ajax 끝
 }//$.search 끝
 
+// DAY버튼
+$.dayChoice = function(target){
+	id = $('#tab_day_list .on').attr('id');
+	$('#tab_day_list .on').removeClass('on');
+	
+	$('#'+target).addClass('on');
+	
+	$('.content_wrap .'+id).attr('style','display:none');
+	$('.content_wrap .'+target).attr('style','display:block');
+}
+
 
 // 초기 페이지
 $.startPage = function(){
@@ -99,7 +111,8 @@ $.startPage = function(){
 			content="";
 			for(i=1; i<=tdate; i++){
 				dayList += `<li class="dayInfo" id="dayInfo${i}">DAY${i}</li>`;
-				content += `<div class ="tabcontent" id="content${i}" style="display:none"></div>`;
+				content += `<div class ="tabcontent dayInfo${i}" style="display:none">
+							<ul class="schedule_list"></ul></div>`;
 			}
 			
 			pager = $.pageList(res.sp, res.ep, res.tp, res.size);
@@ -109,7 +122,7 @@ $.startPage = function(){
 			$('.dayInfo').first().addClass('on');
 		
 			$('.content_wrap').html(content);
-			$('.content_wrap #content1').attr('style','display:block');
+			$('.content_wrap .dayInfo1').attr('style','display:block');
 			
 			$('#pager').html(pager);
 			

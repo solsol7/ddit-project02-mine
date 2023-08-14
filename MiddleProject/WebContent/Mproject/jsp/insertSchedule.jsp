@@ -51,8 +51,10 @@ $(function(){
 	});
 	
 	//관광지 추가
-	$(document).on('click','.tourismChoice', function(){
-		$.tourismChoice();
+	$(document).on('click','.trChoiceBtn', function(){
+		targetTrNo = $(this).prev().attr('id');
+		targetTrName = $(this).prev().text();
+		$.tourismChoice(targetTrNo, targetTrName);
 	});
 	
 	//관광지 정보
@@ -60,6 +62,12 @@ $(function(){
 		trNo = $(this).attr('id');
 		$.tourismInfo(trNo);
 	});
+	
+	//DAY버튼
+	$(document).on('click','.dayInfo',function(){
+		dayInfoTarget = $(this).attr('id');
+		$.dayChoice(dayInfoTarget);
+	})
 	
 	//페이지버튼
 	$(document).on('click','.pageno',function(){
@@ -77,7 +85,7 @@ $(function(){
 	
 	//이전버튼
 	$(document).on('click', '#prevBtn', function(){
-		currentPage = parseInt($('.pageno').first().text())-1
+		var currentPage = parseInt($('.pageno').first().text())-1
 		$.search(currentPage);
 	});//이전 끝
 
@@ -126,10 +134,10 @@ $(function(){
 			<div style="background-image: url(<%=request.getContextPath()%>/Mproject/images/m01.jpg);"></div>
 			<div class="subTit">
 				<div>
-					<h2 data-aos="fade-up">관광정보</h2>
+					<h2 data-aos="fade-up">일정관리</h2>
 				</div>
 				<div>
-					<i data-aos="fade-up" data-aos-delay="350">대전의 다양한 관광정보를 확인하세요</i>
+					<i data-aos="fade-up" data-aos-delay="350">나만의 일정을 만들어보세요.</i>
 				</div>
 			</div>
 		</div>
@@ -147,14 +155,6 @@ $(function(){
 							</ul>
 							<div class="content_wrap">
 								<!-- tabcontent 출력부분 -->
-<!-- 								<div class ="tabcontent"> -->
-<!-- 									<ul id="schedule_list"> -->
-<!-- 										<li>한라산</li> -->
-<!-- 										<li>성산일충봉</li> -->
-<!-- 										<li>섭지코지</li> -->
-<!-- 										<li>만장굴</li> -->
-<!-- 									</ul> -->
-<!-- 								</div> -->
 							</div>
 							
 							

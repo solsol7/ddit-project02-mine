@@ -13,3 +13,7 @@
 	display : inline-block;
 	cursor : pointer;
 }
+
+.dayInfo{
+	cursor : pointer;
+}
