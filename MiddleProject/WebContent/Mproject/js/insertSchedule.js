@@ -34,6 +34,10 @@ $.tourismInfo = function(trNo){
 			// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
 			// marker.setMap(null);    
 			
+			$(document).on('click',marker,function(){
+				alert('마커');
+			})
+			
 			
 
 		},// success 끝
@@ -47,6 +51,7 @@ $.tourismInfo = function(trNo){
 $.tourismChoice = function(trNo, trName){
 	$('.content_wrap div[style="display:block"] .schedule_list')
 			.append('<li class="selectedSchedule" id='+trNo+'>'+trName+'</li>');
+			
 }
 
 // 검색

@@ -179,10 +179,11 @@ $(function(){
 					</div>	
 				</div>
 			</div>
+			
 		</section>
 		
 		<br>
-		<div id="pageList"></div>
+<!-- 		<div id="pageList"></div> -->
 
 
 		<!-- // container -->
