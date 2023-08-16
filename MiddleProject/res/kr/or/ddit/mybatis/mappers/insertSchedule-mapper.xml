@@ -29,4 +29,9 @@
 		 <![CDATA[ where rownum <= #{endIndex}) A where A.rnum >=#{startIndex}]]> 
 	</select>
 	
+	<insert id="insertSchedule" parameterType="scheduleDetailVo">
+		insert into schedule_detail(sc_dt_no, sc_dt_order, sc_dt_tour, sc_no)
+		values(#{sc_dt_no}, #{sc_dt_order}, #{sc_dt_tour}, #{sc_no})
+	</insert>
+	
 </mapper>

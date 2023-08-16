@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import util.MybatisUtil;
+import vo.ScheduleDetailVO;
 import vo.TourismVO;
 
 public class InsertScheduleDaoImpl implements IInsertScheduleDao{
@@ -33,6 +34,25 @@ public class InsertScheduleDaoImpl implements IInsertScheduleDao{
 		}
 		
 		return list;
+	}
+
+	@Override
+	public int insertSchedule(ScheduleDetailVO vo) {
+		int cnt=0;
+		SqlSession session = null;
+		
+		try {
+			session = MybatisUtil.getSqlSession();
+			cnt = session.insert("insertSchedule.insertSchedule",vo);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.commit();
+			session.close();
+		}
+		
+		return cnt;
 	}
 
 }

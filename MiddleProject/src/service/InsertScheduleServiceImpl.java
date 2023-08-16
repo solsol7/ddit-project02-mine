@@ -5,6 +5,7 @@ import java.util.Map;
 
 import dao.IInsertScheduleDao;
 import dao.InsertScheduleDaoImpl;
+import vo.ScheduleDetailVO;
 import vo.TourismVO;
 
 public class InsertScheduleServiceImpl implements IInsertScheduleService{
@@ -22,6 +23,11 @@ public class InsertScheduleServiceImpl implements IInsertScheduleService{
 	@Override
 	public List<TourismVO> searchTourList(Map<String, String> map) {
 		return dao.searchTourList(map);
+	}
+
+	@Override
+	public int insertSchedule(ScheduleDetailVO vo) {
+		return dao.insertSchedule(vo);
 	}
 
 }

@@ -35,7 +35,6 @@
 <script src="<%=request.getContextPath()%>/Mproject/js/insertSchedule.js"  type="text/javascript"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=95544088854ec9cb3a80eaad450b5e1e"></script>
 
-
 <script>
 $(function(){
 	
@@ -49,6 +48,12 @@ $(function(){
 		sword = $('.search #searchTourList').val()
 		$.search(currentPage);
 	});
+	
+	//관광지 삭제
+	$(document).on('click','.trRemoveBtn',function(){
+		$(this).parent().prev().remove();
+		$(this).parent().remove();
+	})
 	
 	//관광지 추가
 	$(document).on('click','.trChoiceBtn', function(){
@@ -146,15 +151,19 @@ $(function(){
 
 		
 		<section id="container">
+
 			<div id="content">
 				<div class="wrap">
+					<input type="submit" form="schedule_list" value="저장" id="save_schedule_list">
 					<div class="tour_wrap">
 						<div class="tourtime_wrap">
 							<ul class="tab_day_list" id="tab_day_list">
 								<!-- DAY출력 부분 -->
 							</ul>
 							<div class="content_wrap">
-								<!-- tabcontent 출력부분 -->
+								<form action="<%=request.getContextPath()%>/insertSchedule.do" method="post">
+									<!-- tabcontent 출력부분 -->
+								</form>
 							</div>
 							
 							

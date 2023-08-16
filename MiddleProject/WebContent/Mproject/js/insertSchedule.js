@@ -34,9 +34,9 @@ $.tourismInfo = function(trNo){
 			// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
 			// marker.setMap(null);    
 			
-			$(document).on('click',marker,function(){
-				alert('마커');
-			})
+//			$(document).on('click',marker,function(){
+//				alert('마커');
+//			})
 			
 			
 
@@ -48,11 +48,25 @@ $.tourismInfo = function(trNo){
 }
 
 //관광지 추가
+/*$.tourismChoice = function(trNo, trName){
+	$('.content_wrap div[style="display:block"] #schedule_list')
+			.append('<input type="hidden" name="scheduleList" value='+trNo+'>'+
+					'<li class="selectedSchedule">'+trName+
+					'<button type="button" class="trRemoveBtn" id="remove_schedule_list">삭제</button>'+
+					'</li>');
+}*/
 $.tourismChoice = function(trNo, trName){
-	$('.content_wrap div[style="display:block"] .schedule_list')
-			.append('<li class="selectedSchedule" id='+trNo+'>'+trName+'</li>');
-			
+	$('.content_wrap div[style="display:block"] #schedule_list')
+			.append('<li class="selectedSchedule">'+trName+
+					'<button type="button" class="trRemoveBtn" id="remove_schedule_list">삭제</button>'+
+					'</li>');
+	
+	for(i=0; i<$('.tabcontent').length; i++){
+		Schedule[]
+	}
+
 }
+
 
 // 검색
 $.search = function(cpage){
@@ -81,6 +95,13 @@ $.search = function(cpage){
 		},//success 끝
 		error : function(xhr){
 			
+			
+			
+			
+			
+			
+			
+			
 		}//error 끝
 	})//ajax 끝
 }//$.search 끝
@@ -107,17 +128,21 @@ $.startPage = function(){
 		
 		dateType : 'json',
 		success : function(res){
+			scNo = res.sc_no;
 			sdate = new Date(res.sc_sdate).getTime();
 			edate = new Date(res.sc_edate).getTime();
 	
 			tdate = (edate-sdate)/(1000*60*60*24)+1;
 		
 			dayList = "";
-			content="";
+			content='<input type="hidden" name="scNo" value=${scNo}>';
 			for(i=1; i<=tdate; i++){
 				dayList += `<li class="dayInfo" id="dayInfo${i}">DAY${i}</li>`;
 				content += `<div class ="tabcontent dayInfo${i}" style="display:none">
-							<ul class="schedule_list"></ul></div>`;
+							<ul id="schedule_list">
+								<input type="hidden" name="dayInfo" value=${i}>
+							</ul>
+							</div>`;
 			}
 			
 			pager = $.pageList(res.sp, res.ep, res.tp, res.size);
