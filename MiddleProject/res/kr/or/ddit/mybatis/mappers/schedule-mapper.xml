@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="schedule">
+
+	<select id="getAllList" resultType="scheduleVo">
+		select sc_title, to_char(sc_sdate, 'yy-mm-dd') sc_sdate, to_char(sc_edate, 'yy-mm-dd') sc_edate from schedule
+	</select>
+	
+	<insert id="insertSchedule" parameterType="scheduleVo">
+		insert into schedule (sc_no, sc_title, sc_sdate, sc_edate, users_no)
+		values (#{sc_no},#{sc_title}, #{sc_sdate}, #{sc_edate}, 'U_23_0001')
+	</insert>	
+	
+	<select id="getScNo" resultType="String">
+		select 'sc_' || TO_CHAR(SYSDATE,'YYMMDD') || '_' || LPAD((SEQ_SC.nextval), 4,'0') from (select count(*) from schedule)
+	</select>
+
+</mapper>

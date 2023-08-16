@@ -34,13 +34,27 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/Mproject/js/main.js"></script>
 <script src="<%=request.getContextPath()%>/Mproject/js/insertSchedule.js"  type="text/javascript"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=95544088854ec9cb3a80eaad450b5e1e"></script>
-
+<%
+ 	ScheduleVO vo = (ScheduleVO)request.getAttribute("scheduleVO");
+	String sdate = vo.getSc_sdate();
+	System.out.println(sdate);
+	String edate = vo.getSc_edate();
+	System.out.println(edate);
+%>
 <script>
 $(function(){
 	
  	mypath="<%=request.getContextPath()%>";
 	
-	$.startPage();
+  	scSdate = new Date("<%=vo.getSc_sdate()%>").getTime();
+ 	scEdate = new Date("<%=vo.getSc_edate()%>").getTime();
+ 	
+ 	
+ 	scNo = "<%=vo.getSc_no()%>";
+ 	
+ 	 
+ 	$.startPage(scNo, scSdate, scEdate);
+// 	$.startPage();
 	
 	//검색버튼
 	$('#searchBtn').on('click', function(){

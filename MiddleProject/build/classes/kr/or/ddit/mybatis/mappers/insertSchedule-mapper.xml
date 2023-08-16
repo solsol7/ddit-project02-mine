@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="insertSchedule">
+
+	<sql id="dynamicCondition">
+	   <where>
+	       <if test="sword != null and sword neq '' ">
+	        tr_name like  '%'||#{sword}||'%'
+	       </if>
+	   </where>
+	</sql>
+	
+	
+	<!-- 실험용 Schedule select -->
+	<select id="scheduleTest" resultType="scheduleVo">
+		select * from schedule where sc_no='sc_230812_0001'
+	</select>
+	
+	
+	<!-- 검색 -->
+	<select id="searchTourList" parameterType="Map" resultType="tourVo">
+		select A.* from (select rownum as rnum, B.* from
+			(select tr_no, tr_name from tourism where tr_name like '%'||#{sword}||'%'
+		   		 union all
+			select rs_no, rs_name from restaurant where rs_name like '%'||#{sword}||'%') B
+		 <![CDATA[ where rownum <= #{endIndex}) A where A.rnum >=#{startIndex}]]> 
+	</select>
+	
+	<insert id="insertSchedule" parameterType="scheduleDetailVo">
+		insert into schedule_detail(sc_dt_no, sc_dt_order, sc_dt_tour, sc_no)
+		values(#{sc_dt_no}, #{sc_dt_order}, #{sc_dt_tour}, #{sc_no})
+	</insert>
+	
+</mapper>

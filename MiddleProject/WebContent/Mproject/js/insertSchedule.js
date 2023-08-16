@@ -62,7 +62,7 @@ $.tourismChoice = function(trNo, trName){
 					'</li>');
 	
 	for(i=0; i<$('.tabcontent').length; i++){
-		Schedule[]
+
 	}
 
 }
@@ -117,9 +117,38 @@ $.dayChoice = function(target){
 	$('.content_wrap .'+target).attr('style','display:block');
 }
 
+//초기페이지
+$.startPage = function(sc_no, scSdate, scEdate){
+	scNo = sc_no;
+	
+	sdate = new Date(scSdate).getTime()
+	edate = new Date(scEdate).getTime()
+
+	tdate = (edate-sdate)/(1000*60*60*24)+1;
+	alert(tdate);
+	dayList = "";
+	content='<input type="hidden" name="scNo" value=${scNo}>';
+	for(i=1; i<=tdate; i++){
+		dayList += `<li class="dayInfo" id="dayInfo${i}">DAY${i}</li>`;
+		content += `<div class ="tabcontent dayInfo${i}" style="display:none">
+					<ul id="schedule_list">
+						<input type="hidden" name="dayInfo" value=${i}>
+					</ul>
+					</div>`;
+	}
+	
+	$('#tab_day_list').html(dayList);
+	
+	$('.dayInfo').first().addClass('on');
+
+	$('.content_wrap').html(content);
+	$('.content_wrap .dayInfo1').attr('style','display:block');
+	
+	
+}
 
 // 초기 페이지
-$.startPage = function(){
+/*$.startPage = function(){
 	
 	$.ajax({
 		url : `${mypath}/scheduleTest.do`,
@@ -128,6 +157,7 @@ $.startPage = function(){
 		
 		dateType : 'json',
 		success : function(res){
+			alert(res.sc_edate);
 			scNo = res.sc_no;
 			sdate = new Date(res.sc_sdate).getTime();
 			edate = new Date(res.sc_edate).getTime();
@@ -165,7 +195,7 @@ $.startPage = function(){
 		
 	})// ajax끝
 	
-}
+}*/
 
 // 페이지 출력
 $.pageList = function(sp, ep, tp, size){
