@@ -101,7 +101,7 @@ $(function(){
 				<nav id="gnb">
 					<ul class="gnb">
 						<li><a href="<%=request.getContextPath()%>/Mproject/jsp/tourism.jsp">관광정보</a></li>
-						<li><a href="<%=request.getContextPath()%>/Mproject/html/food.html">맛집정보</a></li>
+						<li><a href="<%=request.getContextPath()%>/Mproject/html/restaurant.jsp">맛집정보</a></li>
 						<li><a href="<%=request.getContextPath()%>/Mproject/html/event.html">이벤트</a></li>
 						<li><a href="<%=request.getContextPath()%>/Mproject/html/celebration.html">행사안내</a></li>
 						<li><a href="<%=request.getContextPath()%>/Mproject/html/community.html">커뮤니티</a>

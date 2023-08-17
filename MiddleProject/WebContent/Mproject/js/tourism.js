@@ -14,8 +14,6 @@ $.updateGB = function(gb, trNo){
 		},
 		dataType : 'json',
 		success : function(res){
-			
-			alert("ajax옴")
 			$('#good_num').text(res.tr_good);
 			$('#bad_num').text(res.tr_bad);
 			

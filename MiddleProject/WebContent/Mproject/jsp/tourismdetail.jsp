@@ -51,14 +51,14 @@ $(function(){
 	// 지도
 	var container =document.getElementById('map');
 	var options ={
-		center : new kakao.maps.LatLng(33.450701 ,126.570667),
+		center : new kakao.maps.LatLng(<%=vo.getTr_lat()%> ,<%=vo.getTr_long()%>),
 		level :3
 	};
 
 	var map = new kakao.maps.Map(container ,options);
 	
 	// 마커가 표시될 위치입니다 
-	var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
+	var markerPosition  = new kakao.maps.LatLng(<%=vo.getTr_lat()%>, <%=vo.getTr_long()%>); 
 
 	// 마커를 생성합니다
 	var marker = new kakao.maps.Marker({
@@ -69,7 +69,9 @@ $(function(){
 	marker.setMap(map);
 
 	// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-	// marker.setMap(null);    
+	// marker.setMap(null);  
+	
+	
 	$(".gbBtn").on('click',function(){
 		gb=$(this).attr('id');
 		trNo = "<%=vo.getTr_no()%>";

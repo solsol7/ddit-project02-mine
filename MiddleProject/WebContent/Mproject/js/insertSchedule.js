@@ -38,8 +38,6 @@ $.tourismInfo = function(trNo){
 //				alert('마커');
 //			})
 			
-			
-
 		},// success 끝
 		error : function(xhr){
 			
@@ -115,8 +113,6 @@ $.dayChoice = function(target){
 $.startPage = function(sc_no, scSdate, scEdate){
 	scNo = sc_no;
 	
-	alert(scNo);
-	
 	sdate = new Date(scSdate).getTime()
 	edate = new Date(scEdate).getTime()
 
@@ -141,55 +137,6 @@ $.startPage = function(sc_no, scSdate, scEdate){
 	
 }
 
-// 초기 페이지
-/*$.startPage = function(){
-	
-	$.ajax({
-		url : `${mypath}/scheduleTest.do`,
-//		선영언니 서블릿이름으로 바꿔야함!!
-		type : 'get',
-		
-		dateType : 'json',
-		success : function(res){
-			alert(res.sc_edate);
-			scNo = res.sc_no;
-			sdate = new Date(res.sc_sdate).getTime();
-			edate = new Date(res.sc_edate).getTime();
-	
-			tdate = (edate-sdate)/(1000*60*60*24)+1;
-		
-			dayList = "";
-			content='<input type="hidden" name="scNo" value=${scNo}>';
-			for(i=1; i<=tdate; i++){
-				dayList += `<li class="dayInfo" id="dayInfo${i}">DAY${i}</li>`;
-				content += `<div class ="tabcontent dayInfo${i}" style="display:none">
-							<ul id="schedule_list">
-								<input type="hidden" name="dayInfo" value=${i}>
-							</ul>
-							</div>`;
-			}
-			
-			pager = $.pageList(res.sp, res.ep, res.tp, res.size);
-			
-			$('#tab_day_list').html(dayList);
-			
-			$('.dayInfo').first().addClass('on');
-		
-			$('.content_wrap').html(content);
-			$('.content_wrap .dayInfo1').attr('style','display:block');
-			
-			$('#pager').html(pager);
-			
-			
-		},
-		error : function(xhr){
-			alert("상태 : "+xhr.status);
-		}
-		
-		
-	})// ajax끝
-	
-}*/
 
 // 페이지 출력
 $.pageList = function(sp, ep, tp, size){
