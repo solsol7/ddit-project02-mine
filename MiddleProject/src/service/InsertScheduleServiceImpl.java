@@ -26,8 +26,8 @@ public class InsertScheduleServiceImpl implements IInsertScheduleService{
 	}
 
 	@Override
-	public int insertSchedule(ScheduleDetailVO vo) {
-		return dao.insertSchedule(vo);
+	public int insertScheduleDetail(ScheduleDetailVO vo) {
+		return dao.insertScheduleDetail(vo);
 	}
 
 }

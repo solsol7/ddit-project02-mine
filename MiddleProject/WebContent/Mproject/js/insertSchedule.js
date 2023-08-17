@@ -48,23 +48,15 @@ $.tourismInfo = function(trNo){
 }
 
 //관광지 추가
-/*$.tourismChoice = function(trNo, trName){
+$.tourismChoice = function(trNo, trName){
+	
+	num = $('.content_wrap div[style="display:block"]').attr('data-no');
+	
 	$('.content_wrap div[style="display:block"] #schedule_list')
-			.append('<input type="hidden" name="scheduleList" value='+trNo+'>'+
+			.append('<input type="hidden" name="scDtTour" value="'+num+'-'+trNo+'">'+
 					'<li class="selectedSchedule">'+trName+
 					'<button type="button" class="trRemoveBtn" id="remove_schedule_list">삭제</button>'+
 					'</li>');
-}*/
-$.tourismChoice = function(trNo, trName){
-	$('.content_wrap div[style="display:block"] #schedule_list')
-			.append('<li class="selectedSchedule">'+trName+
-					'<button type="button" class="trRemoveBtn" id="remove_schedule_list">삭제</button>'+
-					'</li>');
-	
-	for(i=0; i<$('.tabcontent').length; i++){
-
-	}
-
 }
 
 
@@ -82,8 +74,10 @@ $.search = function(cpage){
 			code = "<ul>";
 			
 			$.each(res.list, function(i,v){
-				code += `<li class="tourismChoice"><div class="search_tr_name" id="${v.tr_no}">${v.tr_name}</div>
-						<button type="button" class="trChoiceBtn">추가</button></li>`;
+				code += `<li class="tourismChoice">
+							<div class="search_tr_name" id="${v.tr_no}">${v.tr_name}</div>
+							<button type="button" class="trChoiceBtn">추가</button>
+						</li>`;
 			});//반복문 끝
 			code += "</ul>";
 			
@@ -121,19 +115,18 @@ $.dayChoice = function(target){
 $.startPage = function(sc_no, scSdate, scEdate){
 	scNo = sc_no;
 	
+	alert(scNo);
+	
 	sdate = new Date(scSdate).getTime()
 	edate = new Date(scEdate).getTime()
 
 	tdate = (edate-sdate)/(1000*60*60*24)+1;
-	alert(tdate);
 	dayList = "";
-	content='<input type="hidden" name="scNo" value=${scNo}>';
+	content=`<input type="hidden" name="scNo" value=${scNo}>`;
 	for(i=1; i<=tdate; i++){
 		dayList += `<li class="dayInfo" id="dayInfo${i}">DAY${i}</li>`;
-		content += `<div class ="tabcontent dayInfo${i}" style="display:none">
-					<ul id="schedule_list">
-						<input type="hidden" name="dayInfo" value=${i}>
-					</ul>
+		content += `<div class ="tabcontent dayInfo${i}" data-no="${i}" style="display:none">
+						<ul id="schedule_list"></ul>
 					</div>`;
 	}
 	
@@ -142,6 +135,7 @@ $.startPage = function(sc_no, scSdate, scEdate){
 	$('.dayInfo').first().addClass('on');
 
 	$('.content_wrap').html(content);
+	
 	$('.content_wrap .dayInfo1').attr('style','display:block');
 	
 	

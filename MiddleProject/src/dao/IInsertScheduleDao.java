@@ -9,5 +9,5 @@ import vo.TourismVO;
 public interface IInsertScheduleDao {
 	public List<TourismVO> searchTourList(Map<String, String> map);
 	
-	public int insertSchedule(ScheduleDetailVO vo);
+	public int insertScheduleDetail(ScheduleDetailVO vo);
 }

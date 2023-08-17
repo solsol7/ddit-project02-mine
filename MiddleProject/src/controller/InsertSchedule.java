@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.IInsertScheduleService;
+import service.InsertScheduleServiceImpl;
+import vo.ScheduleDetailVO;
+
 
 @WebServlet("/insertSchedule.do")
 public class InsertSchedule extends HttpServlet {
@@ -22,13 +26,35 @@ public class InsertSchedule extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 
 		String scNo = request.getParameter("scNo");
-		String dayInfo = request.getParameter("dayInfo");
+		String[] scDtTour = request.getParameterValues("scDtTour");
 		
-		String[] scheduleList = request.getParameterValues("scheduleList");
+		IInsertScheduleService service = InsertScheduleServiceImpl.getInstance();
 		
-		for(int i=0; i<scheduleList.length; i++) {
+		String num = "1";
+		int order = 1;
+		for(int i=0; i<scDtTour.length; i++) {
 			
+			ScheduleDetailVO vo = new ScheduleDetailVO();
+			
+			vo.setSc_no(scNo);
+			
+			String no = (scDtTour[i].split("-"))[0];
+			
+			if(!no.equals(num)) {
+				num=no;
+				order=1;
+			}
+			
+			vo.setSc_dt_no(vo.getSc_no()+"_"+no);
+			
+			vo.setSc_dt_order(order++);
+			vo.setSc_dt_tour(scDtTour[i].split("-")[1]);
+			
+			service.insertScheduleDetail(vo);
 		}
+		
+		response.sendRedirect(request.getContextPath()+"/Mproject/jsp/schedule.jsp");
+		
 		
 	}
 

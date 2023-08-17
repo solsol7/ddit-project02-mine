@@ -37,13 +37,13 @@ public class InsertScheduleDaoImpl implements IInsertScheduleDao{
 	}
 
 	@Override
-	public int insertSchedule(ScheduleDetailVO vo) {
+	public int insertScheduleDetail(ScheduleDetailVO vo) {
 		int cnt=0;
 		SqlSession session = null;
 		
 		try {
 			session = MybatisUtil.getSqlSession();
-			cnt = session.insert("insertSchedule.insertSchedule",vo);
+			cnt = session.insert("insertSchedule.insertScheduleDetail",vo);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

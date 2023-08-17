@@ -46,8 +46,8 @@ $(function(){
 	
  	mypath="<%=request.getContextPath()%>";
 	
-  	scSdate = new Date("<%=vo.getSc_sdate()%>").getTime();
- 	scEdate = new Date("<%=vo.getSc_edate()%>").getTime();
+  	scSdate = new Date("<%=vo.getSc_sdate()%>");
+ 	scEdate = new Date("<%=vo.getSc_edate()%>");
  	
  	
  	scNo = "<%=vo.getSc_no()%>";
@@ -55,6 +55,10 @@ $(function(){
  	 
  	$.startPage(scNo, scSdate, scEdate);
 // 	$.startPage();
+	
+	$(document).on('click','#save_schedule_list',function(){
+		$('#scheduleListForm').get(0).submit();
+	})
 	
 	//검색버튼
 	$('#searchBtn').on('click', function(){
@@ -168,17 +172,17 @@ $(function(){
 
 			<div id="content">
 				<div class="wrap">
-					<input type="submit" form="schedule_list" value="저장" id="save_schedule_list">
+					<button type="button" id="save_schedule_list">저장</button>
 					<div class="tour_wrap">
 						<div class="tourtime_wrap">
 							<ul class="tab_day_list" id="tab_day_list">
 								<!-- DAY출력 부분 -->
 							</ul>
-							<div class="content_wrap">
-								<form action="<%=request.getContextPath()%>/insertSchedule.do" method="post">
-									<!-- tabcontent 출력부분 -->
-								</form>
-							</div>
+							<form action="<%=request.getContextPath()%>/insertSchedule.do" method="post" id="scheduleListForm">
+								<div class="content_wrap">
+										<!-- tabcontent 출력부분 -->
+								</div>
+							</form>
 							
 							
 							<div class="sch_wrap">
