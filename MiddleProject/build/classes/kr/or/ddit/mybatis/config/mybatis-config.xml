@@ -20,9 +20,12 @@
 	 
 	<typeAliases>
 		<!-- <typeAlias type="클래스의 전체 경로" alias="별칭"/> -->
-		<typeAlias type="vo.TourismVO" alias="tourVo"></typeAlias>		
-		<typeAlias type="vo.ScheduleVO" alias="scheduleVo"></typeAlias>		
-		<typeAlias type="vo.ScheduleDetailVO" alias="scheduleDetailVo"></typeAlias>		
+		<typeAlias type="vo.TourismVO" alias="tourVo"></typeAlias>	
+		<typeAlias type="vo.ScheduleVO" alias="scheduleVo"></typeAlias>
+		<typeAlias type="vo.ScheduleDetailVO" alias="scheduleDetailVo"></typeAlias>
+		<typeAlias type="vo.CommunityVO" alias="comVo"></typeAlias>
+     	<typeAlias type="vo.CouponVO" alias="couponVO"></typeAlias> 
+      	
 	</typeAliases>
 	
 	 
@@ -43,8 +46,12 @@
 	 <!-- DB에 사용되는 SQL문들이 저장된 xml파일 등록하는 부분 -->
 	 	<mappers>
 	 		<!-- <mapper resource="경로명/파일명.xml"/> -->
+	 		<!-- <mapper resource="kr/or/ddit/mybatis/mappers/tourism-mapper.xml"/> -->
 	 		<mapper resource="kr/or/ddit/mybatis/mappers/tourism-mapper.xml"/>
+	 		<mapper resource="kr/or/ddit/mybatis/mappers/communityMG-mapper.xml"/>
+	 		<mapper resource="kr/or/ddit/mybatis/mappers/couponMG-mapper.xml"/>
 	 		<mapper resource="kr/or/ddit/mybatis/mappers/insertSchedule-mapper.xml"/>
 	 		<mapper resource="kr/or/ddit/mybatis/mappers/schedule-mapper.xml"/>
+	 		
 	 	</mappers>
 </configuration>

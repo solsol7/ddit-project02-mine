@@ -53,6 +53,8 @@ public class TourismDaoImpl implements ITourismDao{
 		
 		return cnt;
 	}
+	
+	
 
 	@Override
 	public List<TourismVO> selectByPage(Map<String, String> map) {
@@ -196,6 +198,24 @@ public class TourismDaoImpl implements ITourismDao{
 			e.printStackTrace();
 		}finally {
 			session.commit();
+			session.close();
+		}
+		
+		return cnt;
+	}
+
+	@Override
+	public int getTRListCount(Map<String, String> map) {
+		SqlSession session = null;
+		int cnt=0;
+		
+		try {
+			session = MybatisUtil.getSqlSession();
+			cnt = session.selectOne("tourism.getTRListCount",map);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
 			session.close();
 		}
 		

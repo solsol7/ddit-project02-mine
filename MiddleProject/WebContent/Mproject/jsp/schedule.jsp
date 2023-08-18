@@ -75,7 +75,6 @@
 <script>
 	mypath = '<%=request.getContextPath()%>';
 	currentPage = 1;
-	
 	$(function(){
 		
 		$.scheduleList();	
@@ -167,6 +166,10 @@
 
 	}
 	
+	$(document).on('click','.checkMySchedule',function(){
+		scNo = $(this).attr('id');
+		location.href = "<%= request.getContextPath()%>/checkMySchedule.do?scNo="+scNo;
+	});
 
 
 </script>

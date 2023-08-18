@@ -10,6 +10,8 @@ public interface ITourismDao {
 	
 	public int getListCount(Map<String, String> map);
 	
+	public int getTRListCount(Map<String, String> map);
+	
 	public List<TourismVO> selectByPage(Map<String, String> map);
 	
 	public TourismVO selectById(String trNo);
@@ -25,4 +27,5 @@ public interface ITourismDao {
 	public int updateGood(String trNo);
 
 	public int updateBad(String trNo);
+	
 }

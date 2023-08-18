@@ -71,6 +71,11 @@ public class TourismServiceImpl implements ITourismService{
 		return dao.updateBad(trNo);
 	}
 
+	@Override
+	public int getTRListCount(Map<String, String> map) {
+		return dao.getTRListCount(map);
+	}
+
 
 
 }

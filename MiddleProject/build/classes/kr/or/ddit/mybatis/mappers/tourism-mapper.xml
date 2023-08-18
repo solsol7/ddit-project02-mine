@@ -20,10 +20,15 @@
 </select>
 
 
-<!-- 모든 결과값의 갯수 출력 -->
+<!-- Tourism테이블 모든 결과값의 갯수 출력 -->
 <select id="getListCount" resultType="int" parameterType="Map">
 	select count(*) from tourism <include refid="dynamicCondition"></include>
-	order by tr_no desc
+</select>
+
+<select id="getTRListCount" resultType="int" parameterType="Map">
+	select count(*) from (select * from tourism
+                union all
+                select * from restaurant) <include refid="dynamicCondition"></include>
 </select>
 
 

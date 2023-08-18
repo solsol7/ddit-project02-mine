@@ -1,8 +1,9 @@
 /**
  * 
  */
-//관광지 정보
-$.tourismInfo = function(trNo){
+
+//관광지 정보 클릭 >> 지도
+$.tourismInfoMap = function(trNo){
 	
 	$.ajax({
 		url : `${mypath}/scheduleTourismInfo.do`,
@@ -18,7 +19,6 @@ $.tourismInfo = function(trNo){
 			};
 		
 			var map = new kakao.maps.Map(container ,options);
-			
 			
 			// 마커가 표시될 위치입니다 
 			var markerPosition  = new kakao.maps.LatLng(res.tr_lat,res.tr_long); 
@@ -40,7 +40,7 @@ $.tourismInfo = function(trNo){
 			
 		},// success 끝
 		error : function(xhr){
-			
+			alert("상태 : "+xhr.status)
 		}// error 끝
 	})// ajax끝
 }
@@ -53,7 +53,7 @@ $.tourismChoice = function(trNo, trName){
 	$('.content_wrap div[style="display:block"] #schedule_list')
 			.append('<input type="hidden" name="scDtTour" value="'+num+'-'+trNo+'">'+
 					'<li class="selectedSchedule">'+trName+
-					'<button type="button" class="trRemoveBtn" id="remove_schedule_list">삭제</button>'+
+					'<button type="button" class="trRemoveBtn" id="remove_schedule_list">X</button>'+
 					'</li>');
 }
 

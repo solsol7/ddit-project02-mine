@@ -34,4 +34,11 @@
 		values(#{sc_dt_no}, #{sc_dt_order}, #{sc_dt_tour}, #{sc_no})
 	</insert>
 	
+	<select id="tourismInfo" parameterType="String" resultType="tourVo">
+		select * from (select * from tourism
+               			 union all
+               			 select * from restaurant)
+        where tr_no=#{tr_no}
+	</select>
+	
 </mapper>

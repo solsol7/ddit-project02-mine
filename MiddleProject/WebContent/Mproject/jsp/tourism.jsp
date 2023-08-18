@@ -12,6 +12,7 @@
 	content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
 <meta name="format-detection" content="telephone=no">
 <title>대전전시관</title>
+
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Mproject/css/base.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Mproject/css/common.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Mproject/css/fullpage.css">
@@ -35,6 +36,12 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/Mproject/js/main.js"></script>
 <script src="<%=request.getContextPath()%>/Mproject/js/tourism.js"  type="text/javascript"></script>
 
+<%
+
+	
+	String inputId = (String)session.getAttribute("LOGINID");
+
+%>
 <script>
 mypath = '<%= request.getContextPath()%>';
 currentPage = 1;
@@ -89,33 +96,47 @@ $(function(){
 
 	<div id="wrap">
 		<!-- S. header -->
-		<header id="header" class="slidedown">
+		<header id="header"  class="mob on"> <!-- !!!!!!!!!! -->
 			<div class="inner wrap">
 				<h1 class="logo">
-					<a href="<%=request.getContextPath()%>/admin/jsp/index.jsp" title="">NORI Daejeon</a>
+					<a href="<%=request.getContextPath()%>/Mproject/jsp/main.jsp" title="">NORI Daejeon</a>
 				</h1>
-				
-				
-				
 				<a href="#" class="btn_menu" data-util="menu">메뉴 열기</a>
 				<nav id="gnb">
 					<ul class="gnb">
-						<li><a href="<%=request.getContextPath()%>/Mproject/jsp/tourism.jsp">관광정보</a></li>
-						<li><a href="<%=request.getContextPath()%>/Mproject/html/restaurant.jsp">맛집정보</a></li>
-						<li><a href="<%=request.getContextPath()%>/Mproject/html/event.html">이벤트</a></li>
-						<li><a href="<%=request.getContextPath()%>/Mproject/html/celebration.html">행사안내</a></li>
-						<li><a href="<%=request.getContextPath()%>/Mproject/html/community.html">커뮤니티</a>
-							<ul>
-								<li><a href="/html/notice.html" class="board_notice">공지사항</a></li>
-								<li><a href="/html/qa.html" class="board_Dgallery">Q&A</a></li>
-							</ul></li>
+						<li><a href="<%=request.getContextPath()%>/Mproject/jsp/tourism.jsp" >관광정보</a></li>
+						<li><a href="<%=request.getContextPath()%>/Mproject/jsp/restaurant.jsp" >맛집정보</a></li>
+						<li><a href="<%=request.getContextPath()%>/Mproject/jsp/communityList.jsp" >커뮤니티</a>
+						<li><a href="<%=request.getContextPath()%>/Mproject/jsp/noticelist.jsp" class="board_notice">공지사항</a></li>
+						<li><a href="<%=request.getContextPath()%>/qaList.do" class="board_Dgallery">Q&A</a></li>
 					</ul>
 				</nav>
 				<div class="util_member">
-					<a href="login.html">로그인</a> <a href="join.html">회원가입</a> <a
-						href=mypage.html">마이페이지</a>
-				</div>
+<%
 
+	
+	if(inputId!=null){
+		
+	
+
+%>
+<a href="#"><%=inputId %>님</a>
+	<a href="#" id="logout">로그아웃</a>
+<%
+	}else{
+		
+	
+%>
+<a href="<%=request.getContextPath()%>/Mproject/jsp/login.jsp">로그인</a>
+<a href="<%=request.getContextPath()%>/Mproject/jsp/login.jsp">회원가입</a>
+<%
+	}
+
+%>
+
+					<a href="">마이페이지</a>
+				</div>
+				
 			</div>
 		</header>
 		<div class="area_subVisual">

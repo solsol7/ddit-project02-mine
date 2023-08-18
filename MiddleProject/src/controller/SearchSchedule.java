@@ -19,6 +19,7 @@ import service.ITourismService;
 import service.InsertScheduleServiceImpl;
 import service.TourismServiceImpl;
 import util.PageInfoCM;
+import util.PageInfoSS;
 import util.PageInfoTR;
 import vo.PageVO;
 import vo.TourismVO;
@@ -41,7 +42,7 @@ public class SearchSchedule extends HttpServlet {
 			currentPage = Integer.parseInt(cpage);
 		}
 		
-		PageVO pvo = PageInfoCM.pageInfo(currentPage, sword);
+		PageVO pvo = PageInfoSS.pageInfo(currentPage, sword);
 		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("startIndex", String.valueOf(pvo.getStartIndex()));

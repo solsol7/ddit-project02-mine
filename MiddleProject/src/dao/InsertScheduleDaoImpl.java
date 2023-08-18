@@ -55,4 +55,21 @@ public class InsertScheduleDaoImpl implements IInsertScheduleDao{
 		return cnt;
 	}
 
+	@Override
+	public TourismVO tourismInfo(String trNo) {
+		SqlSession session = null;
+		TourismVO vo = new TourismVO();
+		
+		try {
+			session = MybatisUtil.getSqlSession();
+			vo = session.selectOne("insertSchedule.tourismInfo",trNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		
+		return vo;
+	}
+
 }

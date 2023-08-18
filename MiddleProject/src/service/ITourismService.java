@@ -10,6 +10,8 @@ public interface ITourismService {
 	
 	public int getListCount(Map<String, String> map);
 	
+	public int getTRListCount(Map<String, String> map);
+	
 	public List<TourismVO> selectByPage(Map<String, String> map);
 	
 	public TourismVO selectById(String trNo);

@@ -11,9 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import service.IInsertScheduleService;
 import service.ITourismService;
+import service.InsertScheduleServiceImpl;
 import service.TourismServiceImpl;
 import vo.TourismVO;
+
 
 
 @WebServlet("/scheduleTourismInfo.do")
@@ -26,8 +29,9 @@ public class ScheduleTourismInfo extends HttpServlet {
 		
 		String trNo = request.getParameter("trNo");
 		
-		ITourismService service = TourismServiceImpl.getInstance();
-		TourismVO vo=service.selectById(trNo);
+		IInsertScheduleService service = InsertScheduleServiceImpl.getInstance();
+		
+		TourismVO vo = service.tourismInfo(trNo);
 		
 		Gson gson = new Gson();
 		String jsonData = gson.toJson(vo);

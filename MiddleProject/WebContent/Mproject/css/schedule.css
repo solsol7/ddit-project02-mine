@@ -15,4 +15,24 @@
 .sch_wrap .sch_list{width:100%;}
 .sch_wrap .sch_list li{width:100%;border-bottom: 1px solid #f2f2f2;padding-left: 23px;box-sizing: border-box;line-height: 46px;}
 .tour_map{width: 53%;float: right; border-radius: 6px; box-shadow: 3px 3px 17px 0px rgb(119 119 119 / 17%);border-radius: 6px;height: 700px;}
-.tour_wrap{width:100%;min-height:700px;clear: both; margin-top: 80px;}
+.tour_wrap {
+    width: 100%;
+    min-height: 700px;
+    clear: both;
+    margin-top: 80px;
+    position: relative;
+    top: 58px;
+}
+
+.right_blue {
+    border: none;
+    color: #fff;
+    /* width: 100px; */
+    padding: 4px 15px;
+    background: #4e73df;
+    border-radius: 5px;
+    position: relative;
+    top: 37px;
+    position: relative;
+    float: right;
+}

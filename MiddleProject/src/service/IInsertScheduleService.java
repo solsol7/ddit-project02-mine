@@ -10,4 +10,6 @@ public interface IInsertScheduleService {
 	public List<TourismVO> searchTourList(Map<String, String> map);
 	
 	public int insertScheduleDetail(ScheduleDetailVO vo);
+	
+	public TourismVO tourismInfo(String trNo);
 }

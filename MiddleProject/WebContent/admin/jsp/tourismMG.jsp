@@ -74,8 +74,8 @@
     <div id="wrapper">
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<%=request.getContextPath()%>/admin/index.html">
+           <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center"  href="<%=request.getContextPath()%>/admin/jsp/welcome_mg.jsp">
                 <div class="sidebar-brand-text mx-3">Nori Daejeon</div>
             </a>
 
@@ -85,13 +85,13 @@
             <hr class="sidebar-divider">
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="user.html">
+                <a href="user_board.html"  class="nav-link collapsed">
                     <i class="fas fa-fw fa-user"></i>
                     <span>회원정보</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a href="<%=request.getContextPath()%>/admin/jsp/tourismMG.jsp"  class="nav-link collapsed">
                     <i class="fas fa-fw fa-rocket"></i>
                     <span>관광정보</span>
                 </a>
@@ -99,7 +99,7 @@
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a href="<%=request.getContextPath()%>/admin/jsp/food_board.jsp"  class="nav-link collapsed">
                     <i class="fas fa-fw fa-leaf"></i>
                     <span>맛집정보</span>
                 </a>
@@ -112,22 +112,9 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed"  href="<%=request.getContextPath()%>/admin/jsp/m_noticelist.jsp">
                     <i class="fas fa-fw  fa-check"></i>
                     <span>공지사항</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
-                    <i class="fas fa-fw  fa-calendar"></i>
-                    <span>행사일정</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
-                    <i class="fas fa-fw   fa-star"></i>
-                    <span>이벤트</span>
                 </a>
             </li>
 
@@ -145,7 +132,7 @@
                 </a>
             </li>
         </ul>
-        <!-- End of Sidebar -->
+        <!— End of Sidebar —>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">

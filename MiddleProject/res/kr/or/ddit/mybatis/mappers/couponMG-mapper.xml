@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="couponMG">
+	
+	<sql id="dynamicCondition">
+	   <where>
+	       <if test="sword != null and sword neq '' ">
+	        cp_name like  '%'||#{sword}||'%' 
+	       </if>
+	   </where>
+	</sql>
+
+	<select id="getCouponList" resultType="couponVO">
+		select * from coupon
+	</select>
+	
+	<select id="getCoupon" resultType="couponVO" parameterType="String">
+		select * from coupon where cp_no=#{cp_no}
+	</select>
+	
+	<insert id="insertCoupon" parameterType="couponVO">
+		insert into coupon(cp_no, cp_name, cp_sdate, cp_edate, cp_con, cp_code, mg_no)
+		values(#{cp_no}, #{cp_name}, #{cp_sdate}, #{cp_edate}, #{cp_con}, #{cp_code}, #{mg_no})
+	</insert>
+	
+	<delete id="deleteCoupon" parameterType="String">
+		delete coupon where cp_no=#{cp_no}
+	</delete>
+
+	
+	<!-- Coupon테이블 모든 결과값의 갯수 출력 -->
+	<select id="getListCount" resultType="int" parameterType="Map">
+		select count(*) from coupon <include refid="dynamicCondition"></include>
+	</select>
+	
+	
+	<!-- 페이지 결과값 출력 -->
+	<select id="selectByPage" resultType="couponVo" parameterType="Map">
+		 select A.* from (
+		     select rownum as rnum, B.*  from (
+		         select * from coupon
+		         <include refid="dynamicCondition"/>
+		         order by cp_no desc) B
+		         <![CDATA[
+		     where rownum <= #{endIndex} ) A 
+	 	 where A.rnum >=#{startIndex}
+	 ]]> 
+	</select>
+	
+	<!-- detail 출력 -->
+	<select id="selectById" resultType="couponVo" parameterType="String">
+		select * from coupon where cp_no=#{cp_no}
+	</select>
+
+	
+	
+	
+</mapper>

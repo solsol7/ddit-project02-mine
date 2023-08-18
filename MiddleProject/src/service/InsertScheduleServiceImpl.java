@@ -30,4 +30,9 @@ public class InsertScheduleServiceImpl implements IInsertScheduleService{
 		return dao.insertScheduleDetail(vo);
 	}
 
+	@Override
+	public TourismVO tourismInfo(String trNo) {
+		return dao.tourismInfo(trNo);
+	}
+
 }
