@@ -22,6 +22,11 @@
     <script src="<%=request.getContextPath()%>/admin/js/jquery-3.7.0.min.js"></script>
     <script src="<%=request.getContextPath()%>/admin/js/restaurantMG.js"  type="text/javascript"></script>
     <script src="<%=request.getContextPath()%>/admin/js/tourismMG.js"  type="text/javascript"></script>
+<%
+
+	String inputId = (String)session.getAttribute("LOGINID");
+
+%>
  <script>
     mypath = '<%= request.getContextPath()%>';
     currentPage = 1;
@@ -110,6 +115,12 @@
                     <span>문의게시판</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#">
+                    <i class="fas fa-fw fa-desktop"></i>
+                    <span>커뮤니티</span>
+                </a>
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link collapsed"  href="<%=request.getContextPath()%>/admin/jsp/m_noticelist.jsp">
@@ -138,9 +149,40 @@
         <div id="content-wrapper" class="d-flex flex-column">
             <!-- Main Content -->
             <div id="content">
-                <!-- Topbar -->
+                               <!-- Topbar -->
+                
+                
+                
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                     <!-- Sidebar Toggle (Topbar) -->
+                    
+                    <%
+
+	
+	if(inputId!=null){
+		
+	
+
+%>
+
+                     <a href="#" class="btn btn-primary  btn-icon-split  mr10" id="btn_logout">
+											  <span class="text">로그아웃</span> </a>
+<%
+	}else{
+		
+	
+%>
+
+  <a href="<%=request.getContextPath() %>/admin/jsp/mglogin.jsp" class="btn btn-primary  btn-icon-split  mr10" id="write">
+											  <span class="text">로그인</span> </a>
+
+<%
+	}
+
+%>
+                    
+                    
+                    
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
@@ -170,11 +212,9 @@
                     </li>
 
                     <!-- Nav Item - Alerts -->
-                    <li class="nav-item dropdown no-arrow mx-1">
-                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-bell fa-fw"></i>
+              
                             <!-- Counter - Alerts -->
-                            <span class="badge badge-danger badge-counter">3+</span>
+                   
                         </a>
                         <!-- Dropdown - Alerts -->
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
@@ -221,8 +261,24 @@
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">관리자님 반갑습니다.</span>
-                            <img class="img-profile rounded-circle" src="img/undraw_profile_3.svg">
+                         
+  <%
+
+	if(inputId!=null){
+
+%>
+          			    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=inputId %>님</span>
+<%
+	}else{
+		
+	
+%>
+						  <span class="mr-2 d-none d-lg-inline text-gray-600 small">로그인을해주세요</span>
+<%
+	}                       
+                         
+%>                        
+                            <img class="img-profile rounded-circle" src="<%=request.getContextPath()%>/admin/img/undraw_profile_3.svg">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

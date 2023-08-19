@@ -22,6 +22,7 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Mproject/css/detail.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Mproject/js/custom.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Mproject/css/tourism.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Mproject/css/schedule.css">
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Mproject/css/main.css?ver=1.2">
 <link rel="stylesheet"
@@ -85,10 +86,14 @@ $(function(){
 		$.updateGB(gb, trNo);
 	}); 
 	
+	// 목록
+	$('#listBtn').on('click',function(){
+		location.href="<%=request.getContextPath()%>/Mproject/jsp/tourism.jsp";
+	})
 	
 	// 	댓글
 	ntNo = "<%=vo.getTr_no()%>";
-	$.commentList(ntNo, <%=inputNo%>);
+	$.commentList(ntNo, "<%=inputNo%>");
 	
 	$(document).on('click','.commentOne',function(){
 		cmNo = $(this).attr('id');
@@ -209,15 +214,8 @@ $(function(){
 						
 						
 						
-						<div class="note_area">
-							<b>관람시 주의사항</b>
-							<ul class="list_bullet">
-
-							</ul>
-						</div>
-
-
-
+						<button type="button" id="listBtn" class="right_blue">목록</button>
+						<br>
 
 						<!-- 댓글 -->
 						<div class="comment-area">
@@ -251,9 +249,9 @@ $(function(){
 											</div>
 										</div>
 										
-										<div class="submit-btn">
+										<div>
 											<a href="javascript:void(0);"><p>
-											<button type="submit" form="sendComment">등록</button></p></a>
+											<button class="submit-btn" type="submit" form="sendComment">등록</button></p></a>
 										</div>
 									</div>
 								</div>
