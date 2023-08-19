@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="comment">
+	<select id="getCommentList" parameterType="String" resultType="commentVO">
+		select * from comments where nt_no=#{nt_no}
+	</select>
+	
+	<insert id="insertComment" parameterType="CommentVO">
+		insert into comments (users_no, mg_no, cm_con, cm_no, cm_date, nt_no, users_name)
+		values(#{users_no}, #{mg_no}, #{cm_con}, 'CM_23_' || LPAD((SEQ_CM.NEXTVAL),3,'0'), sysdate, #{nt_no}, #{users_name})
+	</insert>
+
+	<select id="getUserName" parameterType="String" resultType="String">
+		select users_name from (select users_name, users_no from users union all select mg_name, mg_no from manager)
+		where users_no=#{users_no}
+	</select>
+	
+	<delete id="deleteComment" parameterType="String">
+		delete from comments where cm_no=#{cm_no}
+	</delete>
+	
+
+</mapper>

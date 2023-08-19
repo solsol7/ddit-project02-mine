@@ -81,7 +81,7 @@ $(function(){
 	//List클릭
 	$(document).on('click','.tourDetail',function(){
 		trNo = $(this).attr('id');
-		location.href = "<%= request.getContextPath()%>/tourismDetail.do?trNo="+trNo;
+		location.href = "<%= request.getContextPath()%>/commentDetail.do?trNo="+trNo;
 	});//tourDetail 끝
 
 })// $(function)끝

@@ -25,7 +25,7 @@
 		<typeAlias type="vo.ScheduleDetailVO" alias="scheduleDetailVo"></typeAlias>
 		<typeAlias type="vo.CommunityVO" alias="comVo"></typeAlias>
      	<typeAlias type="vo.CouponVO" alias="couponVO"></typeAlias> 
-      	
+      	<typeAlias type="vo.CommentVO" alias="commentVO"></typeAlias> 
 	</typeAliases>
 	
 	 
@@ -52,6 +52,6 @@
 	 		<mapper resource="kr/or/ddit/mybatis/mappers/couponMG-mapper.xml"/>
 	 		<mapper resource="kr/or/ddit/mybatis/mappers/insertSchedule-mapper.xml"/>
 	 		<mapper resource="kr/or/ddit/mybatis/mappers/schedule-mapper.xml"/>
-	 		
+	 		<mapper resource="kr/or/ddit/mybatis/mappers/comment-mapper.xml"/>
 	 	</mappers>
 </configuration>

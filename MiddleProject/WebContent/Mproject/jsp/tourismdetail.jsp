@@ -1,3 +1,4 @@
+<%@page import="vo.CommentVO"%>
 <%@page import="vo.TourismVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -32,17 +33,21 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/Mproject/js/scroll.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/Mproject/js/main.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/Mproject/js/tourism.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/Mproject/js/comment.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=95544088854ec9cb3a80eaad450b5e1e"></script>
 <%
 
 	TourismVO vo = (TourismVO)request.getAttribute("tourDetail");
  	String inputId = (String)session.getAttribute("LOGINID");
-	
+ 	String inputNo = (String)session.getAttribute("USERNUM");
+ 	
 %>
 	
 <script>
 $(function(){
 	mypath = "<%=request.getContextPath()%>";
+	
+	
 
 	<%-- $(".gbBtn").on('click',function(){
 		location.href="<%=request.getContextPath()%>/tourismGood.do";
@@ -79,7 +84,20 @@ $(function(){
 		
 		$.updateGB(gb, trNo);
 	}); 
-
+	
+	
+	// 	댓글
+	ntNo = "<%=vo.getTr_no()%>";
+	$.commentList(ntNo, <%=inputNo%>);
+	
+	$(document).on('click','.commentOne',function(){
+		cmNo = $(this).attr('id');
+		if(confirm("정말로 삭제하시겠습니까?")){
+			location.href="<%=request.getContextPath() %>/deleteComment.do?cmNo="+cmNo+"&&ntNo="+"<%=vo.getTr_no()%>";
+		}else{
+			return;
+		}
+	})
 
 });
 
@@ -209,80 +227,33 @@ $(function(){
 								
 
 								<div class="comment-list-box">
-									<div class="list-top">
-										<div class="write-info">
-											<h1>공주사람</h1>
-											<div class="date">2023-01-02 오전 4:00:26</div>
-										</div>
-										<div class="btn-box" style="text-align: right;">
-											<input type="hidden" name="txt_Memo_Del_Seq" value="2">
-
-											<div class="comment-delete"
-												onclick="fnc_Memo_Del(document.frm_Send, '', 6);">
-												<p>삭제</p>
-											</div>
-										</div>
-									</div>
-									<div class="comment-contents">나도 가고싶</div>
-								</div>
-
-								<div class="comment-list-box">
-									<div class="list-top">
-										<div class="write-info">
-											<h1>공주사람</h1>
-											<div class="date">2023-01-02 오전 4:00:26</div>
-										</div>
-										<div class="btn-box" style="text-align: right;">
-											<input type="hidden" name="txt_Memo_Del_Seq" value="2">
-
-											<div class="comment-delete"
-												onclick="fnc_Memo_Del(document.frm_Send, '', 6);">
-												<p>삭제</p>
-											</div>
-										</div>
-									</div>
-									<div class="comment-contents">나도 가고싶</div>
+									<!-- 댓글 리스트 출력되는 곳 -->
 								</div>
 
 								<div class="comment-write">
 									<div class="inner">
+										
 										<div class="title">댓글작성</div>
 										<div class="comment-input-area">
-											<div class="input-wrap">
-												<div class="input-area half name-box">
-													<div class="input-inner">
-														<h1>이름</h1>
-														<input type="hidden" name="memo_Bd_Seq" value="5">
 
-														<input type="text" name="txt_Memo_Name" id="txt_Memo_Name"
-															placeholder="이름을 입력해주세요.">
-
-													</div>
-												</div>
-												<input type="hidden" name="txt_Memo_Email"
-													id="txt_Memo_Email" value="">
-
-												<div class="input-area half pwd-box">
-													<div class="input-inner">
-														<h1>비밀번호</h1>
-														<input type="password" name="txt_Memo_Pwd"
-															id="txt_Memo_Pwd" placeholder="비밀번호를 입력해주세요.">
-													</div>
-												</div>
-
-											</div>
 											<div class="input-wrap">
 												<div class="input-area height-auto">
+												<form id="sendComment" action="<%=request.getContextPath()%>/insertComment.do" method="post">
+													<input type="hidden" name="ntNo" value="<%=vo.getTr_no()%>">
+													<input type="hidden" name="userId" value="<%=inputId%>">
+													<input type="hidden" name="userNo" value="<%=inputNo%>">
 													<div class="input-inner">
-														<textarea name="mtx_Memo_Cont" id="mtx_Memo_Cont"
+														<textarea name="content" id="content"
 															placeholder="내용을 입력해주세요."></textarea>
 													</div>
+												</form>
 												</div>
 											</div>
 										</div>
+										
 										<div class="submit-btn">
-											<a href="javascript:void(0);"
-												onclick="fnc_Save_Memo(document.frm_Send);"><p>등록</p></a>
+											<a href="javascript:void(0);"><p>
+											<button type="submit" form="sendComment">등록</button></p></a>
 										</div>
 									</div>
 								</div>
