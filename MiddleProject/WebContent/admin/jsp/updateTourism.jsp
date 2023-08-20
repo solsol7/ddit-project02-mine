@@ -33,6 +33,24 @@
 
 %>
 	con = <%=vo.getTr_con()%>.trim();
+	
+    //@로그아웃
+    $('#btn_logout').on('click',function(e){
+		e.preventDefault();
+		$.ajax({
+			url: "<%=request.getContextPath()%>/logoutmg.do",
+			type:'post',
+			success:function(res){
+				
+				alert("로그아웃 완료!")
+				 location.href="<%=request.getContextPath()%>/Mproject/jsp/main.jsp";
+			},
+			error:function(xhr){
+				alert("상태:"+xhr.status);
+			}
+
+		});//ajax
+	});//onclick
 </script>
 
 </head>
@@ -40,66 +58,75 @@
 <body id="page-top">
 	<!-- Page Wrapper -->
 	<div id="wrapper">
-		<!-- Sidebar -->
+       <!-- Sidebar -->
 		<ul
 			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
 			id="accordionSidebar">
-			<!-- Sidebar - Brand -->
-			<a
-				class="sidebar-brand d-flex align-items-center justify-content-center"
-				href="<%=request.getContextPath() %>/admin/index.html">
-				<div class="sidebar-brand-text mx-3">Nori Daejeon</div>
-			</a>
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center"  href="<%=request.getContextPath()%>/admin/jsp/usersMG.jsp">
+                <div class="sidebar-brand-text mx-3">Nori Daejeon</div>
+            </a>
 
-			<!-- Divider -->
-			<hr class="sidebar-divider my-0">
-			<!-- Divider -->
-			<hr class="sidebar-divider">
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="user.html"> <i
-					class="fas fa-fw fa-user"></i> <span>회원정보</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link collapsed" href="<%=request.getContextPath()%>/tourismMG.do"
-				> <i
-					class="fas fa-fw fa-rocket"></i> <span>관광정보</span>
-			</a></li>
+            <li class="nav-item">
+                <a href="<%=request.getContextPath()%>/admin/jsp/usersMG.jsp"  class="nav-link collapsed">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>회원정보</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<%=request.getContextPath()%>/admin/jsp/tourismMG.jsp"  class="nav-link collapsed">
+                    <i class="fas fa-fw fa-rocket"></i>
+                    <span>관광정보</span>
+                </a>
+            </li>
 
-			<!-- Nav Item - Utilities Collapse Menu -->
-			<li class="nav-item"><a class="nav-link collapsed" href="<%=request.getContextPath()%>/admin/jsp/food_board.jsp"
-				> <i
-					class="fas fa-fw fa-leaf"></i> <span>맛집정보</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link collapsed" href="#"
-				> <i
-					class="fas fa-fw fa-desktop"></i> <span>문의게시판</span>
-			</a></li>
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a href="<%=request.getContextPath()%>/admin/jsp/food_board.jsp"  class="nav-link collapsed">
+                    <i class="fas fa-fw fa-leaf"></i>
+                    <span>맛집정보</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<%=request.getContextPath()%>/admin/jsp/communityMG.jsp"  class="nav-link collapsed">
+                    <i class="fas fa-fw fa-leaf"></i>
+                    <span>커뮤니티</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="<%=request.getContextPath()%>/qaList.do">
+                    <i class="fas fa-fw fa-desktop"></i>
+                    <span>문의게시판</span>
+                </a>
+            </li>
 
-			<li class="nav-item"><a class="nav-link collapsed" href="#"
-				> <i
-					class="fas fa-fw  fa-check"></i> <span>공지사항</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link collapsed" href="#"
-				> <i
-					class="fas fa-fw  fa-calendar"></i> <span>행사일정</span>
-			</a></li>
+            <li class="nav-item">
+                <a class="nav-link collapsed"  href="<%=request.getContextPath()%>/admin/jsp/m_noticelist.jsp">
+                    <i class="fas fa-fw  fa-check"></i>
+                    <span>공지사항</span>
+                </a>
+            </li>
 
-			<li class="nav-item"><a class="nav-link collapsed" href="#"
-				> <i
-					class="fas fa-fw   fa-star"></i> <span>이벤트</span>
-			</a></li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="<%=request.getContextPath()%>/admin/jsp/couponMG.jsp">
+                    <i class="fas fa-fw   fa-star"></i>
+                    <span>쿠폰</span>
+                </a>
+            </li>
 
-			<li class="nav-item"><a class="nav-link collapsed" href="#"
-				> <i
-					class="fas fa-fw   fa-star"></i> <span>쿠폰</span>
-			</a></li>
-
-			<li class="nav-item"><a class="nav-link collapsed" href="#"
-				> <i
-					class="fas fa-fw  fa-comment"></i> <span>챗봇</span>
-			</a></li>
-		</ul>
-		<!-- End of Sidebar -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="<%=request.getContextPath()%>/admin/jsp/chatbotMG.jsp">
+                    <i class="fas fa-fw  fa-comment"></i>
+                    <span>챗봇</span>
+                </a>
+            </li>
+        </ul>
+        <!-- End of Sidebar -->
 
 		<!-- Content Wrapper -->
 		<div id="content-wrapper" class="d-flex flex-column">

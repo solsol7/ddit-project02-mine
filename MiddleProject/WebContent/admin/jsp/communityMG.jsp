@@ -64,6 +64,24 @@
     		cmtNo = $(this).attr('id');
     		location.href = "<%= request.getContextPath()%>/communityDetailMG.do?cmtNo="+cmtNo;
     	});//tourDetail 끝
+    	
+        //@로그아웃
+        $('#btn_logout').on('click',function(e){
+    		e.preventDefault();
+    		$.ajax({
+    			url: "<%=request.getContextPath()%>/logoutmg.do",
+    			type:'post',
+    			success:function(res){
+    				
+    				alert("로그아웃 완료!")
+    				 location.href="<%=request.getContextPath()%>/Mproject/jsp/main.jsp";
+    			},
+    			error:function(xhr){
+    				alert("상태:"+xhr.status);
+    			}
+
+    		});//ajax
+    	});//onclick
 
     })// $(function)끝
 </script>
@@ -73,10 +91,12 @@
 <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-           <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center"  href="<%=request.getContextPath()%>/admin/jsp/welcome_mg.jsp">
+       <!-- Sidebar -->
+		<ul
+			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+			id="accordionSidebar">
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center"  href="<%=request.getContextPath()%>/admin/jsp/usersMG.jsp">
                 <div class="sidebar-brand-text mx-3">Nori Daejeon</div>
             </a>
 
@@ -86,7 +106,7 @@
             <hr class="sidebar-divider">
 
             <li class="nav-item">
-                <a href="user_board.html"  class="nav-link collapsed">
+                <a href="<%=request.getContextPath()%>/admin/jsp/usersMG.jsp"  class="nav-link collapsed">
                     <i class="fas fa-fw fa-user"></i>
                     <span>회원정보</span>
                 </a>
@@ -106,7 +126,13 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a href="<%=request.getContextPath()%>/admin/jsp/communityMG.jsp"  class="nav-link collapsed">
+                    <i class="fas fa-fw fa-leaf"></i>
+                    <span>커뮤니티</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="<%=request.getContextPath()%>/qaList.do">
                     <i class="fas fa-fw fa-desktop"></i>
                     <span>문의게시판</span>
                 </a>
@@ -120,20 +146,20 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" href="<%=request.getContextPath()%>/admin/jsp/couponMG.jsp">
                     <i class="fas fa-fw   fa-star"></i>
                     <span>쿠폰</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" href="<%=request.getContextPath()%>/admin/jsp/chatbotMG.jsp">
                     <i class="fas fa-fw  fa-comment"></i>
                     <span>챗봇</span>
                 </a>
             </li>
         </ul>
-        <!— End of Sidebar —>
+        <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">

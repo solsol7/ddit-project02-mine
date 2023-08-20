@@ -5,7 +5,7 @@
 
 <mapper namespace="comment">
 	<select id="getCommentList" parameterType="String" resultType="commentVO">
-		select * from comments where nt_no=#{nt_no}
+		select * from comments where nt_no=#{nt_no} order by cm_date asc
 	</select>
 	
 	<insert id="insertComment" parameterType="CommentVO">

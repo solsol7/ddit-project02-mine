@@ -114,6 +114,22 @@ $(function(){
 		var currentPage = parseInt($('.pageno').first().text())-1
 		$.search(currentPage);
 	});//이전 끝
+	
+
+	//로그아웃
+	$('#logout').on('click',function(){
+		$.ajax({
+			url:"<%=request.getContextPath()%>/logoutMember.do",
+			type:'post',
+			success: function(res) {
+				alert("로그아웃 완료!")
+				 location.href = "<%=request.getContextPath()%>/Mproject/jsp/main.jsp";
+			},
+			error:function(xhr){
+				  alert("상태: " + xhr.status);
+			}
+		});//ajax
+	});//온클릭	
 
 });//$(function) 끝
 </script>
@@ -250,14 +266,7 @@ $(function(){
 
 				</div>
 			</div>
-			<div class="footer_inn">
-				<div class="wrap">
-					<address>
-						<p class="copyright">© 2023 All rights reserved .</p>
-					</address>
-					<a href="#" class="org qacircle"> <i class="fa fa-pencil"></i> Q&A</a>
-				</div>
-			</div>
+			
 		</footer>
 		<!-- //footer -->
 		<!-- //footer -->

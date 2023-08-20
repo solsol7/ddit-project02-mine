@@ -93,17 +93,44 @@ $(function(){
 	
 	// 	댓글
 	ntNo = "<%=vo.getTr_no()%>";
+	//댓글 리스트 출력
 	$.commentList(ntNo, "<%=inputNo%>");
 	
-	$(document).on('click','.commentOne',function(){
+	//댓글등록
+	$('#submit-btn').on('click',function(){
+		userId ="<%=inputId%>"=="null"?null:"userId"
+		if(userId==null){
+			alert("댓글 등록은 로그인한 회원만 가능합니다.")
+		}else{
+			$('#sendComment').submit();
+		}
+	})
+	
+	//댓글 삭제
+	$(document).on('click','.comment-delete',function(){
 		cmNo = $(this).attr('id');
 		if(confirm("정말로 삭제하시겠습니까?")){
-			location.href="<%=request.getContextPath() %>/deleteComment.do?cmNo="+cmNo+"&&ntNo="+"<%=vo.getTr_no()%>";
+			location.href="<%=request.getContextPath()%>/deleteComment.do?cmNo="+cmNo+"&&ntNo="+"<%=vo.getTr_no()%>";
 		}else{
 			return;
 		}
 	})
-
+	
+	//로그아웃
+	$('#logout').on('click',function(){
+		$.ajax({
+			url:"<%=request.getContextPath()%>/logoutMember.do",
+			type:'post',
+			success: function(res) {
+				alert("로그아웃 완료!")
+				 location.href = "<%=request.getContextPath()%>/Mproject/jsp/main.jsp";
+			},
+			error:function(xhr){
+				  alert("상태: " + xhr.status);
+			}
+		});//ajax
+	});//온클릭	
+	
 });
 
 </script >
@@ -144,19 +171,21 @@ $(function(){
 %>
 <a href="#"><%=inputId %>님</a>
 	<a href="#" id="logout">로그아웃</a>
+	<a href="<%=request.getContextPath()%>/Mproject/jsp/mypageMain.jsp">마이페이지</a>
 <%
 	}else{
 		
 	
 %>
+
 <a href="<%=request.getContextPath()%>/Mproject/jsp/login.jsp">로그인</a>
-<a href="<%=request.getContextPath()%>/Mproject/jsp/login.jsp">회원가입</a>
+<a href="<%=request.getContextPath()%>/Mproject/jsp/join.jsp">회원가입</a>
 <%
 	}
 
 %>
 
-					<a href="">마이페이지</a>
+	
 				</div>
 				
 			</div>
@@ -251,7 +280,7 @@ $(function(){
 										
 										<div>
 											<a href="javascript:void(0);"><p>
-											<button class="submit-btn" type="submit" form="sendComment">등록</button></p></a>
+											<button class="submit-btn" id= "submit-btn" type="button">등록</button></p></a>
 										</div>
 									</div>
 								</div>
@@ -287,14 +316,7 @@ $(function(){
 
 				</div>
 			</div>
-			<div class="footer_inn">
-				<div class="wrap">
-					<address>
-						<p class="copyright">© 2023 All rights reserved .</p>
-					</address>
-					<a href="#" class="org qacircle"> <i class="fa fa-pencil"></i> Q&A</a>
-				</div>
-			</div>
+			
 		</footer>
 		<!-- //footer -->
 		<!-- //footer -->

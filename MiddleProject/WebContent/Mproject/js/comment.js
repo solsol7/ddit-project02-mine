@@ -14,7 +14,7 @@ $.commentList = function(ntNo, usersNo){
 		success : function(res){
 			code ="";
 			$.each(res, function(i,v){
-				code +=`<div class="commentOne" id=${v.cm_no}>
+				code +=`<div class="commentOne">
 						<div class="list-top">
 							<div class="write-info">
 								<h1>${v.users_name}</h1>
@@ -24,7 +24,7 @@ $.commentList = function(ntNo, usersNo){
 								<input type="hidden" name="txt_Memo_Del_Seq" value="2">`;
 								
 				if(usersNo==v.users_no){			
-					code+=`<div class="comment-delete">
+					code+=`<div class="comment-delete" id=${v.cm_no}>
 								<p>삭제</p>
 							</div>`;
 
