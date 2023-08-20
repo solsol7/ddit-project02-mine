@@ -23,11 +23,12 @@ public class ScheduleList extends HttpServlet {
 				
 		IScheduleService service = ScheduleServiceImpl.getInstance();
 		
-		List<ScheduleVO> list = service.getAllList();
+		String usersNo = request.getParameter("usersNo");
+		
+		List<ScheduleVO> list = service.getAllList(usersNo);
 		
 		request.setAttribute("scheduleList", list);
-		
-		
+				
 		request.getRequestDispatcher("/Mproject/view/scheduleview.jsp").forward(request, response);
 		
 		
