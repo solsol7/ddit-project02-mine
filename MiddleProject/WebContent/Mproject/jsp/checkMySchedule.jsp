@@ -37,6 +37,12 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/Mproject/js/main.js"></script>
 <script src="<%=request.getContextPath()%>/Mproject/js/schedule.js"  type="text/javascript"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=95544088854ec9cb3a80eaad450b5e1e"></script>
+
+<style>
+.lists{
+	cursor: pointer;
+}
+</style>
 <%
  	int maxDay = (int)request.getAttribute("maxDay");
 
@@ -44,14 +50,18 @@
 	
 	List<List<String>> trNameList = (List<List<String>>)request.getAttribute("trNameList");
 	
+	List<List<String>> trNoList = (List<List<String>>)request.getAttribute("trNoList");
+	
+	String inputId = (String)session.getAttribute("LOGINID");
+	
 %>
 <script>
 $(function(){
 	
- 	mypath="<%=request.getContextPath()%>";
- 	
+ 	mypath="<%=request.getContextPath()%>"; 	
  	
  	scNo = "<%=list.get(0).getSc_no()%>";
+
  	 
 <%--  	$.startPage(scNo, <%=maxDay%>); --%>
 	content = `<input type="hidden" name="scNo" value=${scNo}>`;
@@ -87,13 +97,14 @@ $('.content_wrap .dayInfo1').attr('style','display:block');
 			trNames = ``;
 <%
 			for(int j=0; j<trNameList.get(i).size(); j++){
-%>
-			trNames += `<li>
-<%			
+		
 			String trName = trNameList.get(i).get(j);
+			String trNo = trNoList.get(i).get(j);
+
 %>
-						<%=trName%>
-						</li>`;
+
+			trNames += `<li class="lists" id="<%=trNo%>"><%=trName%></li>`;
+			
 <%
 			}
 %>
@@ -138,11 +149,18 @@ $('.content_wrap .dayInfo1').attr('style','display:block');
 	$(document).on('click','.dayInfo',function(){
 		dayInfoTarget = $(this).attr('id');
 		$.dayChoice(dayInfoTarget);
-	})
-
-function printTrName(){
-
-}
+	});
+	
+	// list목록
+	$(document).on('click','.lists', function(){
+		trNo = $(this).attr('id');
+		$.tourismInfoMap(trNo);
+	});
+	
+	// 목록
+	$('#listBtn').on('click',function(){
+		location.href="<%=request.getContextPath()%>/Mproject/jsp/schedule.jsp";
+	});
 	
 });//$(function) 끝
 
@@ -161,7 +179,7 @@ function printTrName(){
 		<header id="header" class="slidedown">
 			<div class="inner wrap">
 				<h1 class="logo">
-					<a href="<%=request.getContextPath()%>/admin/jsp/index.jsp" title="">NORI Daejeon</a>
+					<a href="<%=request.getContextPath()%>/Mproject/jsp/main.jsp" title="">NORI Daejeon</a>
 				</h1>
 				
 				
@@ -169,20 +187,37 @@ function printTrName(){
 				<a href="#" class="btn_menu" data-util="menu">메뉴 열기</a>
 				<nav id="gnb">
 					<ul class="gnb">
-						<li><a href="<%=request.getContextPath()%>/Mproject/jsp/tourism.jsp">관광정보</a></li>
-						<li><a href="<%=request.getContextPath()%>/Mproject/html/food.html">맛집정보</a></li>
-						<li><a href="<%=request.getContextPath()%>/Mproject/html/event.html">이벤트</a></li>
-						<li><a href="<%=request.getContextPath()%>/Mproject/html/celebration.html">행사안내</a></li>
-						<li><a href="<%=request.getContextPath()%>/Mproject/html/community.html">커뮤니티</a>
-							<ul>
-								<li><a href="/html/notice.html" class="board_notice">공지사항</a></li>
-								<li><a href="/html/qa.html" class="board_Dgallery">Q&A</a></li>
-							</ul></li>
+						<li><a href="<%=request.getContextPath()%>/Mproject/jsp/tourism.jsp" >관광정보</a></li>
+						<li><a href="<%=request.getContextPath()%>/Mproject/jsp/restaurant.jsp" >맛집정보</a></li>
+						<li><a href="<%=request.getContextPath()%>/Mproject/jsp/communityList.jsp" >커뮤니티</a>
+						<li><a href="<%=request.getContextPath()%>/Mproject/jsp/noticelist.jsp" class="board_notice">공지사항</a></li>
+						<li><a href="<%=request.getContextPath()%>/qaList.do" class="board_Dgallery">Q&A</a></li>
 					</ul>
 				</nav>
 				<div class="util_member">
-					<a href="login.html">로그인</a> <a href="join.html">회원가입</a> <a
-						href=mypage.html">마이페이지</a>
+					<%
+
+	
+	if(inputId!=null){
+		
+	
+
+%>
+<a href="#"><%=inputId %>님</a>
+	<a href="#" id="logout">로그아웃</a>
+<%
+	}else{
+		
+	
+%>
+<a href="<%=request.getContextPath()%>/Mproject/jsp/login.jsp">로그인</a>
+<a href="<%=request.getContextPath()%>/Mproject/jsp/login.jsp">회원가입</a>
+<%
+	}
+
+%>
+
+					<a href="<%=request.getContextPath()%>/Mproject/jsp/mypageMain.jsp">마이페이지</a>
 				</div>
 
 			</div>
@@ -206,6 +241,8 @@ function printTrName(){
 
 			<div id="content">
 				<div class="wrap">
+				<button type="button" id="listBtn" class="right_blue">목록</button>
+						<br>
 					<div class="tour_wrap">
 						<div class="tourtime_wrap">
 							<ul class="tab_day_list" id="tab_day_list">
@@ -255,7 +292,6 @@ function printTrName(){
 					<address>
 						<p class="copyright">© 2023 All rights reserved .</p>
 					</address>
-					<a href="#" class="org qacircle"> <i class="fa fa-pencil"></i> Q&A</a>
 				</div>
 			</div>
 		</footer>

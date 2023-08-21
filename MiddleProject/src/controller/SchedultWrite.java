@@ -27,7 +27,8 @@ public class SchedultWrite extends HttpServlet {
 		
 		vo.setSc_title(request.getParameter("scName"));
 		vo.setSc_sdate(request.getParameter("sDate"));
-		vo.setSc_edate(request.getParameter("eDate"));		
+		vo.setSc_edate(request.getParameter("eDate"));	
+		vo.setUsers_no(request.getParameter("usersNo"));
 		
 		IScheduleService service = ScheduleServiceImpl.getInstance();
 		
@@ -35,12 +36,14 @@ public class SchedultWrite extends HttpServlet {
 		
 		vo.setSc_no(scNo);
 		
+		System.out.println(vo.toString());
+		
 		int res = service.insertSchedule(vo);
-		
 
-		request.setAttribute("scheduleVO", vo);
-		
+		request.setAttribute("scheduleVO", vo);		
+
 		request.getRequestDispatcher("/Mproject/jsp/insertSchedule.jsp").forward(request, response);
+
 		
 		//-----------------------------------------------------------------------------------------------------	
 		

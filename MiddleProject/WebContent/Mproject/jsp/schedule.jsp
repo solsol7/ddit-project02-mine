@@ -72,9 +72,20 @@
 }
 </style>
 
+<%
+
+	
+	String inputId = (String)session.getAttribute("LOGINID");
+	String inputNo = (String)session.getAttribute("USERNUM");
+
+%>
+
 <script>
 	mypath = '<%=request.getContextPath()%>';
 	currentPage = 1;
+	
+	usersNo = "<%=inputNo%>";
+	
 	$(function(){
 		
 		$.scheduleList();	
@@ -119,6 +130,7 @@
 		sDate = $('#sDate').val();
 		eDate = $('#eDate').val();
 		
+		
 		// 입력된 날짜를 'yy/mm/dd' 형식으로 변환하는 함수
 	    function formatDate(date) {
 	        const d = new Date(date);
@@ -157,7 +169,7 @@
 		
 		console.log(daysDifference);*/
 		
-		location.href="<%=request.getContextPath()%>/schedultWrite.do?scName="+scName+"&&sDate="+sDate+"&&eDate="+eDate;
+		location.href="<%=request.getContextPath()%>/schedultWrite.do?scName="+scName+"&&sDate="+sDate+"&&eDate="+eDate+"&&usersNo="+usersNo;
 		
 // 		$.scheduleWrite();
 		
@@ -183,30 +195,47 @@
 
 	<div id="wrap">
 		<!-- S. header -->
-		<header id="header" class="slidedown">
+		<header id="header"  class="mob on"> <!-- !!!!!!!!!! -->
 			<div class="inner wrap">
 				<h1 class="logo">
-					<a href="index.html" title="">NORI Daejeon</a>
+					<a href="<%=request.getContextPath()%>/Mproject/jsp/main.jsp" title="">NORI Daejeon</a>
 				</h1>
 				<a href="#" class="btn_menu" data-util="menu">메뉴 열기</a>
 				<nav id="gnb">
 					<ul class="gnb">
-						<li><a href="tourisme.html">관광정보</a></li>
-						<li><a href="food.html">맛집정보</a></li>
-						<li><a href="event.html">이벤트</a></li>
-						<li><a href="celebration.html">행사안내</a></li>
-						<li><a href="community.html">커뮤니티</a>
-							<ul>
-								<li><a href="/html/notice.html" class="board_notice">공지사항</a></li>
-								<li><a href="/html/qa.html" class="board_Dgallery">Q&A</a></li>
-							</ul></li>
+						<li><a href="<%=request.getContextPath()%>/Mproject/jsp/tourism.jsp" >관광정보</a></li>
+						<li><a href="<%=request.getContextPath()%>/Mproject/jsp/restaurant.jsp" >맛집정보</a></li>
+						<li><a href="<%=request.getContextPath()%>/Mproject/jsp/communityList.jsp" >커뮤니티</a>
+						<li><a href="<%=request.getContextPath()%>/Mproject/jsp/noticelist.jsp" class="board_notice">공지사항</a></li>
+						<li><a href="<%=request.getContextPath()%>/qaList.do" class="board_Dgallery">Q&A</a></li>
 					</ul>
 				</nav>
 				<div class="util_member">
-					<a href="login.html">로그인</a> <a href="join.html">회원가입</a> <a
-						href=mypage.html">마이페이지</a>
-				</div>
+<%
 
+	
+	if(inputId!=null){
+		
+	
+
+%>
+<a href="#"><%=inputId %>님</a>
+	<a href="#" id="logout">로그아웃</a>
+<%
+	}else{
+		
+	
+%>
+<a href="<%=request.getContextPath()%>/Mproject/jsp/login.jsp">로그인</a>
+<a href="<%=request.getContextPath()%>/Mproject/jsp/login.jsp">회원가입</a>
+<%
+	}
+
+%>
+
+					<a href="<%=request.getContextPath()%>/Mproject/jsp/mypageMain.jsp">마이페이지</a>
+				</div>
+				
 			</div>
 		</header>
 		<div class="area_subVisual">
@@ -291,7 +320,6 @@
 					<address>
 						<p class="copyright">© 2023 All rights reserved .</p>
 					</address>
-					<a href="#" class="org qacircle"> <i class="fa fa-pencil"></i> Q&A</a>
 				</div>
 			</div>
 		</footer>
