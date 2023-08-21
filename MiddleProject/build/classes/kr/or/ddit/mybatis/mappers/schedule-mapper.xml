@@ -5,17 +5,33 @@
 
 <mapper namespace="schedule">
 
-	<select id="getAllList" resultType="scheduleVo">
-		select sc_title, to_char(sc_sdate, 'yy-mm-dd') sc_sdate, to_char(sc_edate, 'yy-mm-dd') sc_edate from schedule
+	<select id="getAllList" resultType="scheduleVo" parameterType="String">
+		select sc_no, sc_title, to_char(sc_sdate, 'yy-mm-dd') sc_sdate, to_char(sc_edate, 'yy-mm-dd') sc_edate from schedule
+		where users_no=#{data}
 	</select>
 	
 	<insert id="insertSchedule" parameterType="scheduleVo">
 		insert into schedule (sc_no, sc_title, sc_sdate, sc_edate, users_no)
-		values (#{sc_no},#{sc_title}, #{sc_sdate}, #{sc_edate}, 'U_23_0001')
+		values (#{sc_no},#{sc_title}, #{sc_sdate}, #{sc_edate}, #{users_no})
 	</insert>	
 	
 	<select id="getScNo" resultType="String">
 		select 'sc_' || TO_CHAR(SYSDATE,'YYMMDD') || '_' || LPAD((SEQ_SC.nextval), 4,'0') from (select count(*) from schedule)
 	</select>
+	
+	<select id="getScheduleDetail" resultType="scheduleDetailVo" parameterType="String">		
+		select * from schedule_detail where sc_no = #{date} order by sc_dt_no, sc_dt_order
+	</select>
+	
+	<select id="getMaxDay" resultType="int" parameterType="String">		
+		select max(SUBSTR(sc_dt_no, INSTR(sc_dt_no, '_', 1, 3) + 1)) from schedule_detail where sc_no = #{data}
+	</select>
+	
+	<select id="getTrName" resultType="String" parameterType="String">
+		select tr_name from tourism where tr_no=#{data}
+		   		 union all
+			select rs_name from restaurant where  rs_no=#{data}
+	</select>
+	
 
 </mapper>
