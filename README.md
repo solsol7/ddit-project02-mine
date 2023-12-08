@@ -1,4 +1,4 @@
-# Project- NORI 대전
+![image](https://github.com/solsol7/dditProject02Mine/assets/132313045/10278f23-758a-449e-b7e3-cf78132df456)# Project- NORI 대전
 
 
 ## 🖥️ 프로젝트 소개
@@ -14,6 +14,9 @@
 - **IDE** : ECLIPSE
 - **Database** : Oracle DB(11xe)
 - **ORM** : Mybatis
+
+### :video_camera: 프로젝트 영상
+[일정관리 영상](https://solsol7.tistory.com/69)
 
 ## 📌 나의 기능
 ### 관리자
