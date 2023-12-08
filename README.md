@@ -1,5 +1,3 @@
-![image](https://github.com/solsol7/dditProject02Mine/assets/132313045/10278f23-758a-449e-b7e3-cf78132df456)# Project- NORI 대전
-
 
 ## 🖥️ 프로젝트 소개
 대전의 관광지와 맛집을 소개하고 여행 일정을 관리할 수 있는 사이트입니다.
