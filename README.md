@@ -8,14 +8,14 @@
 ## 🕰️ 개발기간
 * 23.07.24 - 23.08.22 (4주)
 
-### ⚙️ 개발 환경
+## ⚙️ 개발 환경
 - `Java 8`
 - `JDK 1.8.0`
 - **IDE** : ECLIPSE
 - **Database** : Oracle DB(11xe)
 - **ORM** : Mybatis
 
-### :video_camera: 프로젝트 영상
+## :video_camera: 프로젝트 영상
 - [일정관리 영상](https://solsol7.tistory.com/69)
 
 ## 📌 나의 기능
