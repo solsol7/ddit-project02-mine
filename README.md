@@ -16,7 +16,7 @@
 - **ORM** : Mybatis
 
 ### :video_camera: 프로젝트 영상
-[일정관리 영상](https://solsol7.tistory.com/69)
+- [일정관리 영상](https://solsol7.tistory.com/69)
 
 ## 📌 나의 기능
 ### 관리자
